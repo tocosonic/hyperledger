@@ -1,0 +1,130 @@
+{
+    "PinMap": {
+        "QmNMrFQ5UFuv8G3wowFfXgjqdaTpuxxDLFaSXoF7UGCQ2k": {
+            "cid": "QmNMrFQ5UFuv8G3wowFfXgjqdaTpuxxDLFaSXoF7UGCQ2k",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmPNmGDHEzwmrW1LE4oQoHC6GsC9r226mQnjnNmFiYaKkK": {
+            "cid": "QmPNmGDHEzwmrW1LE4oQoHC6GsC9r226mQnjnNmFiYaKkK",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmQe7EGK35oMSRcJm635semFuqjMafpr7beHHeRnkL6uz4": {
+            "cid": "QmQe7EGK35oMSRcJm635semFuqjMafpr7beHHeRnkL6uz4",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmQpetLog7cCRG5MrYLDXoCxFKk9c4wni5PmkfkUDonF3m": {
+            "cid": "QmQpetLog7cCRG5MrYLDXoCxFKk9c4wni5PmkfkUDonF3m",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmS1axyMcKnj9wQScNPZdyPnErrzdSKFvJHdnQMf857rRV": {
+            "cid": "QmS1axyMcKnj9wQScNPZdyPnErrzdSKFvJHdnQMf857rRV",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmS78jy6R7fy9fKAv8evk4kbANgku57wtGzTZMx2PQMJKF": {
+            "cid": "QmS78jy6R7fy9fKAv8evk4kbANgku57wtGzTZMx2PQMJKF",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmSEtqHjx91kbZ2fkt89a571bRMNekbEXn6WszTWiZqEdo": {
+            "cid": "QmSEtqHjx91kbZ2fkt89a571bRMNekbEXn6WszTWiZqEdo",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmSQbucUCqiKnHN77h6trf13wr4A7p85McCURPZVtdqrAJ": {
+            "cid": "QmSQbucUCqiKnHN77h6trf13wr4A7p85McCURPZVtdqrAJ",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmTAk6cY1QxfPtytpv2iHpTwmZuD8E7xyAxmA1qccHQimb": {
+            "cid": "QmTAk6cY1QxfPtytpv2iHpTwmZuD8E7xyAxmA1qccHQimb",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmTi1ofesibBzcCxuFBnSzpzqDmnDbuaYHbdtQefZGFLm2": {
+            "cid": "QmTi1ofesibBzcCxuFBnSzpzqDmnDbuaYHbdtQefZGFLm2",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmU2cGpzWDTCD9J4nitivpoQFzpkkiMBQthYkPC67jgayb": {
+            "cid": "QmU2cGpzWDTCD9J4nitivpoQFzpkkiMBQthYkPC67jgayb",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmUKnpEPoofjGLhivr38kQu9XR2irGpzGji5tz9P1HR7ob": {
+            "cid": "QmUKnpEPoofjGLhivr38kQu9XR2irGpzGji5tz9P1HR7ob",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmUuk9589BkVBDSv3CQzwJqseUsLDxc23He5wzzN2DHbfN": {
+            "cid": "QmUuk9589BkVBDSv3CQzwJqseUsLDxc23He5wzzN2DHbfN",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmVFgycghcTaWcWobt9k7XkJRNE7jKMsYwagBeF1XaVcvQ": {
+            "cid": "QmVFgycghcTaWcWobt9k7XkJRNE7jKMsYwagBeF1XaVcvQ",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmVqZZUySXXip2WjyxMjA9esqWWxh2SYgLU2d6sFSqNGvW": {
+            "cid": "QmVqZZUySXXip2WjyxMjA9esqWWxh2SYgLU2d6sFSqNGvW",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmWD1UPL6kvPpdnSQopUu5DETWnWbARrhUamizKpuYDjrc": {
+            "cid": "QmWD1UPL6kvPpdnSQopUu5DETWnWbARrhUamizKpuYDjrc",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmWyud2JgwmNiADmEqCoCY9wxTKucXgU3dbQMJdLq6XWCr": {
+            "cid": "QmWyud2JgwmNiADmEqCoCY9wxTKucXgU3dbQMJdLq6XWCr",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmXConvbgjW8FmmqmyCzJjRpFfEdCKBH3GX9pUqSFWfwN2": {
+            "cid": "QmXConvbgjW8FmmqmyCzJjRpFfEdCKBH3GX9pUqSFWfwN2",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmZtvbSRyksxWPFDWBz1pPY1VsZ5a7fGivj9vdCcjing1d": {
+            "cid": "QmZtvbSRyksxWPFDWBz1pPY1VsZ5a7fGivj9vdCcjing1d",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "Qma7ryDa8jECJgRJr6ArYPKyaY94xHJcfNaaNjkJBAY5as": {
+            "cid": "Qma7ryDa8jECJgRJr6ArYPKyaY94xHJcfNaaNjkJBAY5as",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmcTYJR3tREWLsukNcHTRAB6WSoCavwEunS6hiGTuCR9L3": {
+            "cid": "QmcTYJR3tREWLsukNcHTRAB6WSoCavwEunS6hiGTuCR9L3",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmdGiLv7Xz94WEszZZnyYzizQLX6ErWbaXXLeLZFo5h6FY": {
+            "cid": "QmdGiLv7Xz94WEszZZnyYzizQLX6ErWbaXXLeLZFo5h6FY",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "QmeVj8szVhtztXWH9eA6pA9FbGzSKL1QUz2FpfMQD4qnKK": {
+            "cid": "QmeVj8szVhtztXWH9eA6pA9FbGzSKL1QUz2FpfMQD4qnKK",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "Qmej3MAbartQGMbU6e73sS9UK7NtwE73PJiqBzf6AfVw8B": {
+            "cid": "Qmej3MAbartQGMbU6e73sS9UK7NtwE73PJiqBzf6AfVw8B",
+            "allocations": [],
+            "replication_factor": -1
+        },
+        "Qmf1NTNgH9et4AEUZkBpf6HiU5w7LvdfMJ9czCDiRPc7ui": {
+            "cid": "Qmf1NTNgH9et4AEUZkBpf6HiU5w7LvdfMJ9czCDiRPc7ui",
+            "allocations": [],
+            "replication_factor": -1
+        }
+    },
+    "Version": 2
+}
