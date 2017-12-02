@@ -1,4 +1,4 @@
-FROM 2736904862db
+FROM hyperledger/fabric-ca:x86_64-1.1.0-preview
 RUN useradd --user-group --create-home ec2-user
 RUN chmod a+w -R /etc/hyperledger
 RUN chown -R ec2-user /etc/hyperledger
