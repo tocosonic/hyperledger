@@ -8,6 +8,6 @@ RUN chown -R :0 /data \
  && chown -R :0 /conf \
  && chmod -R g+w /conf \
  && sed -i 's/\"\$1\".*\=/"1" =/' /docker-entrypoint.sh \
- && echo '#/bin/bash' > /zookeeper-3.4.9/zooReady.sh \
- && echo 'if [ $(echo ruok | nc 127.0.0.1 $1) == "imok" ]; then exit 0; else exit 1; fi' >> /zookeeper-3.4.9/zooReady.sh \
- && chmod +x /zookeeper-3.4.9/zooReady.sh
+ && echo '#/bin/bash' > /zooReady.sh \
+ && echo 'if [ $(echo ruok | nc 127.0.0.1 $1) == "imok" ]; then exit 0; else exit 1; fi' >> /zooReady.sh \
+ && chmod +x /zooReady.sh
