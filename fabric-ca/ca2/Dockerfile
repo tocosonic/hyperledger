@@ -1,6 +1,6 @@
 FROM hyperledger/fabric-ca:x86_64-1.1.0-preview
-RUN chown -R :0 /etc/hyperledger
-RUN chmod -R a+w /etc/hyperledger
+RUN chown -R :0 /etc/hyperledger \
+ && chmod -R a+w /etc/hyperledger
 EXPOSE 7054
 VOLUME /etc/hyperledger/fabric-ca-server-config
 VOLUME /etc/hyperledger/fabric-ca-server
