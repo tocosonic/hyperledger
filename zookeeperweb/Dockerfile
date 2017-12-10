@@ -3,6 +3,7 @@ FROM tobilg/zookeeper-webui
 RUN apk update \
  && apk add ca-certificates wget \
  && mkdir /app/.lein \
+ && mkdir /app/.lein/self-installs \
  && export LEIN_HOME=/app/.lein
 RUN wget -O /app/.lein/self-installs/leiningen-2.7.1-standalone.jar https://github.com/technomancy/leiningen/releases/download/2.7.1/leiningen-2.7.1-standalone.zip
 
