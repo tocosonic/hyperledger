@@ -3,4 +3,4 @@ FROM tobilg/zookeeper-webui
 RUN chown -R :0 /app \
  && chmod -R g+w /app
 EXPOSE 8080
-
+ENV LEIN_ROOT=false
