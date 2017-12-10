@@ -7,5 +7,6 @@ RUN chown -R :0 /app \
  && chmod -R g+w /app \
  && chown -R :0 /etc/leinrc \
  && chmod -R g+w /etc/leinrc
+RUN sed -i sed -i 's/export.LEIN.*$/export LEIN_HOME=\"\/app\/.lein\"/g' /usr/local/bin/lein
 EXPOSE 8080
 ENV LEIN_ROOT=false
