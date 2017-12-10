@@ -2,7 +2,7 @@ FROM tobilg/zookeeper-webui
 #:x86_64-1.1.0-preview
 RUN mkdir /app/.lein \
  && export LEIN_HOME=/app/.lein
-RUN wget -O /app/.lein/self-installs/leiningen-2.7.1-standalone.jar https://github.com/technomancy/leiningen/releases/download/2.7.1/leiningen-$LEIN_VERSION-standalone.zip
+RUN wget -O /app/.lein/self-installs/leiningen-2.7.1-standalone.jar https://github.com/technomancy/leiningen/releases/download/2.7.1/leiningen-2.7.1-standalone.zip
 
 # && /usr/local/bin/lein self-install
 RUN chown -R :0 /app \
