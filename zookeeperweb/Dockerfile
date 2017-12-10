@@ -10,6 +10,6 @@ RUN wget -O /app/.lein/self-installs/leiningen-2.7.1-standalone.jar https://gith
 # && /usr/local/bin/lein self-install
 RUN chown -R :0 /app \
  && chmod -R g+w /app
-RUN sed -i 's/export.LEIN.*$/export LEIN_HOME=\"\/app\/.lein\"/g' /usr/local/bin/lein
+RUN sed -i 's/export.LEIN.HOME.*$/export LEIN_HOME=\"\/app\/.lein\"/' /usr/local/bin/lein
 EXPOSE 8080
 ENV LEIN_ROOT=false
