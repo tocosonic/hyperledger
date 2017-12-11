@@ -29,3 +29,8 @@ RUN mkdir /pvc \
  && mkdir /pvc/fabric-peer12-msp \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc
+RUN yum install nano \
+ && yum install epel-release \
+ && yum install joe \
+ && yum install man \
+ && yum install telnet
