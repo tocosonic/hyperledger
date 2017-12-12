@@ -30,6 +30,13 @@ RUN mkdir /pvc \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc \
  && chmod -R o+rx /pvc
+RUN apt-get -y update \
+ && apt-get -y upgrade \
+ && apt-get -y rsync \
+ && apt-get -y nano \
+ && apt-get -y install joe \
+ && apt-get -y install man \
+ && apt-get -y install less
 VOLUME /pvc/couchdb1-data
 VOLUME /pvc/couchdb2-data
 VOLUME /pvc/couchdb3-data
