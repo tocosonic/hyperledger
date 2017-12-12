@@ -33,7 +33,8 @@ RUN yum -y install nano \
  && yum -y install epel-release \
  && yum -y install joe \
  && yum -y install man \
- && yum -y install telnet
+ && yum -y install telnet \
+ && yum -y install rsync
 VOLUME /pvc/couchdb1-data
 VOLUME /pvc/couchdb2-data
 VOLUME /pvc/couchdb3-data
