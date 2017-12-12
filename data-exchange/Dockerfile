@@ -30,11 +30,6 @@ RUN mkdir /pvc \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc \
  && chmod -R o+rx /pvc
-RUN apt-get -y upgrade \
- && apt-get -y install nano \
- && apt-get -y install man \
- && apt-get -y install telnet \
- && apt-get -y install rsync
 VOLUME /pvc/couchdb1-data
 VOLUME /pvc/couchdb2-data
 VOLUME /pvc/couchdb3-data
