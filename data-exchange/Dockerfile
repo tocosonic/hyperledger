@@ -32,8 +32,8 @@ RUN mkdir /pvc \
  && chmod -R o+rx /pvc
 RUN apt-get -y update \
  && apt-get -y upgrade \
- && apt-get -y rsync \
- && apt-get -y nano \
+ && apt-get -y install rsync \
+ && apt-get -y install nano \
  && apt-get -y install joe \
  && apt-get -y install man \
  && apt-get -y install less
