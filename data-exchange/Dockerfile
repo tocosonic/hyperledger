@@ -28,13 +28,15 @@ RUN mkdir /pvc \
  && mkdir /pvc/fabric-peer12-host \
  && mkdir /pvc/fabric-peer12-msp \
  && chown -R :0 /pvc \
- && chmod -R g+rwx /pvc
+ && chmod -R g+rwx /pvc \
+ && chmod -R o+rx /pvc
 RUN yum -y install nano \
  && yum -y install epel-release \
  && yum -y install joe \
  && yum -y install man \
  && yum -y install telnet \
- && yum -y install rsync
+ && yum -y install rsync \
+ && yum -y upgrade
 VOLUME /pvc/couchdb1-data
 VOLUME /pvc/couchdb2-data
 VOLUME /pvc/couchdb3-data
