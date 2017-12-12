@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM hyperledger/fabric-couchdb:x86_64-1.1.0-preview
 # Prepare PVC moint points
 RUN mkdir /pvc \
  && mkdir /pvc/couchdb1-data \
@@ -30,13 +30,11 @@ RUN mkdir /pvc \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc \
  && chmod -R o+rx /pvc
-RUN yum -y install nano \
- && yum -y install epel-release \
- && yum -y install joe \
- && yum -y install man \
- && yum -y install telnet \
- && yum -y install rsync \
- && yum -y upgrade
+RUN apt-get -y upgrade \
+ && apt-get -y install nano \
+ && apt-get -y install man \
+ && apt-get -y install telnet \
+ && apt-get -y install rsync
 VOLUME /pvc/couchdb1-data
 VOLUME /pvc/couchdb2-data
 VOLUME /pvc/couchdb3-data
