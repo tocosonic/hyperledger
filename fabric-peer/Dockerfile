@@ -6,7 +6,7 @@ RUN mkdir /host \
  && chmod -R a+w /etc/hyperledger \
  && chown -R :0 /var/hyperledger \
  && chmod -R a+w /var/hyperledger
-EXPOSE 7051 7053
+EXPOSE 7051 7052 7053
 VOLUME /host/var/run
 VOLUME /etc/hyperledger/fabric
 #WORKDIR /opt/gopath/src/github.com/hyperledger/fabric/peer
