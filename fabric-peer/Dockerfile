@@ -8,6 +8,6 @@ RUN mkdir /host \
  && chmod -R a+w /var/hyperledger
 EXPOSE 7051 7053
 VOLUME /host/var/run
-VOLUME /etc/hyperledger/fabric/msp
+VOLUME /etc/hyperledger/fabric
 #WORKDIR /opt/gopath/src/github.com/hyperledger/fabric/peer
 CMD peer node start
