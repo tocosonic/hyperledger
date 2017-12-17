@@ -15,17 +15,41 @@ RUN apt-get -y update \
  && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
 RUN echo "couchdb couchdb/mode select none" | debconf-set-selections \
  && apt-get -y upgrade couchdb
-#RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.new \
-# && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.new \
-# && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.new \
-# && mv /opt/couchdb/etc/default.ini.bak /opt/couchdb/etc/default.ini \
-# && mv /opt/couchdb/etc/local.ini.bak /opt/couchdb/etc/local.ini \
-# && mv /opt/couchdb/etc/vm.args.bak /opt/couchdb/etc/vm.args
 
-# && apt-get -y install couchdb
+RUN sed -i 's/\[couchdb\]/\[couchdb\]\n\; Specify the location of the database in container.\n\; Optionally\, these directories can be mounted in the host via docker.\ndatabase_dir \= \/opt\/couchdb\/data\/\nview_index_dir \= \/opt\/couchdb\/data\/\nuri_file \= \/opt\/couchdb\/data\/couch.uri\nmax_dbs_open \= 8000\ndelayed_commits \= true\n/' /opt/couchdb/etc/local.ini
+RUN sed -i 's/\[couch_httpd_auth\]/\[couch_httpd_auth\]\niterations \= 1000 \; iterations for password hashing\n/' /opt/couchdb/etc/local.ini
+
+RUN echo [cluster] >> /opt/couchdb/etc/local.ini \
+# && echo ; peer maintains a single replica >> /opt/couchdb/etc/local.ini \
+ && echo n = 1 >> /opt/couchdb/etc/local.ini \
+# && echo ; adjust q to set the level of parallelism locally >> /opt/couchdb/etc/local.ini \
+# && echo ; recommended to have no more than 10 million documents/shard \(q\) >> /opt/couchdb/etc/local.ini \
+# && echo ; for 100 million documents, q=10 -- at a minimum >> /opt/couchdb/etc/local.ini \
+ && echo q = 8 >> /opt/couchdb/etc/local.ini \
+# && echo ; This is a default rule for all databases. >> /opt/couchdb/etc/local.ini \
+# && echo ; When database fragmentation (unused versions) reaches 30% of the total \
+# && echo ; file size, the database will be compacted. \
+ && echo [compactions] >> /opt/couchdb/etc/local.ini \
+ && echo _default = [{db_fragmentation, \"30\%\"}, {view_fragmentation, \"30\%\"}] >> /opt/couchdb/etc/local.ini \
+# && echo ; Optional compaction default that will only allow compactions from 11PM to 4AM >> /opt/couchdb/etc/local.ini \
+# && echo ; _default = [{db_fragmentation, \"30\%\"}, {view_fragmentation, \"30\%\"}, {from, "23:00"}, {to, "04:00"}] >> /opt/couchdb/etc/local.ini \
+# && echo ; Database compaction settings. >> /opt/couchdb/etc/local.ini \
+# && echo ; Databases will be checked every 300s \(5min\) >> /opt/couchdb/etc/local.ini \
+# && echo ; Databases less than 256K in size will not be compacted >> /opt/couchdb/etc/local.ini \
+ && echo [compaction_daemon] >> /opt/couchdb/etc/local.ini \
+ && echo check_interval = 300 >> /opt/couchdb/etc/local.ini \
+ && echo min_file_size = 256000 >> /opt/couchdb/etc/local.ini \
+ && echo [log] >> /opt/couchdb/etc/local.ini \
+ && echo writer = file >> /opt/couchdb/etc/local.ini \
+ && echo file = /opt/couchdb/logs/couchdb.log >> /opt/couchdb/etc/local.ini \
+ && echo level = info >> /opt/couchdb/etc/local.ini \
+ && echo [attachments] >> /opt/couchdb/etc/local.ini \
+ && echo compressible_types = text/*, application/javascript, application/json, application/xml, application/octet-stream >> /opt/couchdb/etc/local.ini \
+ && echo [httpd] >> /opt/couchdb/etc/local.ini \
+ && echo bind_address = 0.0.0.0 >> /opt/couchdb/etc/local.ini
+
 #Prepare folder access rights
 RUN chown -R :0 /opt/couchdb/ \
- && chmod -R g+rwx /opt/couchdb/
-RUN echo [httpd] >> /opt/couchdb/etc/local.ini; echo bind_address = 0.0.0.0 >> /opt/couchdb/etc/local.ini \
+ && chmod -R g+rwx /opt/couchdb/ \
  && sed -i 's/chown.*//g' /docker-entrypoint.sh \
  && sed -i 's/su-exec couchdb \"$@\"/exec \"$@\"/g' /docker-entrypoint.sh
