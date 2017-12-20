@@ -49,5 +49,6 @@ RUN echo [cluster] >> /opt/couchdb/etc/local.ini \
 #Prepare folder access rights
 RUN chown -R :0 /opt/couchdb/ \
  && chmod -R g+rwx /opt/couchdb/ \
+ && sed -i 's/admin = admin/admin = mysecretpassword/' /docker-entrypoint.sh \
  && sed -i 's/chown.*//g' /docker-entrypoint.sh \
  && sed -i 's/su-exec couchdb \"$@\"/exec \"$@\"/g' /docker-entrypoint.sh
