@@ -19,6 +19,7 @@ RUN echo "couchdb couchdb/mode select none" | debconf-set-selections \
 RUN sed -i 's/\[couchdb\]/\[couchdb\]\n\; Specify the location of the database in container.\n\; Optionally\, these directories can be mounted in the host via docker.\ndatabase_dir \= \/opt\/couchdb\/data\/\nview_index_dir \= \/opt\/couchdb\/data\/\nuri_file \= \/opt\/couchdb\/data\/couch.uri\nmax_dbs_open \= 8000\ndelayed_commits \= true\n/' /opt/couchdb/etc/local.ini
 RUN sed -i 's/\[couch_httpd_auth\]/\[couch_httpd_auth\]\niterations \= 1000 \; iterations for password hashing\n/' /opt/couchdb/etc/local.ini
 RUN sed -i 's/\[chttpd\]/\[chttpd\]\nbind_address \= 0\.0\.0\.0/' /opt/couchdb/etc/local.ini
+RUN sed -i 's/name couchdb\@127\.0\.0\.1/nonode\@nohost/g' /opt/couchdb/etc/vm.args
 RUN echo [cluster] >> /opt/couchdb/etc/local.ini \
 # && echo ; peer maintains a single replica >> /opt/couchdb/etc/local.ini \
  && echo n = 1 >> /opt/couchdb/etc/local.ini \
