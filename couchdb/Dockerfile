@@ -21,22 +21,19 @@ RUN sed -i 's/\[couch_httpd_auth\]/\[couch_httpd_auth\]\niterations \= 1000 \; i
 RUN sed -i 's/\[chttpd\]/\[chttpd\]\nbind_address \= 0\.0\.0\.0/' /opt/couchdb/etc/local.ini
 RUN sed -i 's/name couchdb\@127\.0\.0\.1/nonode\@nohost/g' /opt/couchdb/etc/vm.args
 RUN echo [cluster] >> /opt/couchdb/etc/local.ini \
-# && echo ; peer maintains a single replica >> /opt/couchdb/etc/local.ini \
+# peer maintains a single replica
  && echo n = 1 >> /opt/couchdb/etc/local.ini \
-# && echo ; adjust q to set the level of parallelism locally >> /opt/couchdb/etc/local.ini \
-# && echo ; recommended to have no more than 10 million documents/shard \(q\) >> /opt/couchdb/etc/local.ini \
-# && echo ; for 100 million documents, q=10 -- at a minimum >> /opt/couchdb/etc/local.ini \
+# adjust q to set the level of parallelism locally
+# recommended to have no more than 10 million documents/shard
+# for 100 million documents, q=10 -- at a minimum
  && echo q = 8 >> /opt/couchdb/etc/local.ini \
-# && echo ; This is a default rule for all databases. >> /opt/couchdb/etc/local.ini \
-# && echo ; When database fragmentation (unused versions) reaches 30% of the total \
-# && echo ; file size, the database will be compacted. \
+# This is a default rule for all databases:
+# When database fragmentation (unused versions) reaches 30% of the total file size, the database will be compacted.
  && echo [compactions] >> /opt/couchdb/etc/local.ini \
  && echo _default = [{db_fragmentation, \"30\%\"}, {view_fragmentation, \"30\%\"}] >> /opt/couchdb/etc/local.ini \
-# && echo ; Optional compaction default that will only allow compactions from 11PM to 4AM >> /opt/couchdb/etc/local.ini \
-# && echo ; _default = [{db_fragmentation, \"30\%\"}, {view_fragmentation, \"30\%\"}, {from, "23:00"}, {to, "04:00"}] >> /opt/couchdb/etc/local.ini \
-# && echo ; Database compaction settings. >> /opt/couchdb/etc/local.ini \
-# && echo ; Databases will be checked every 300s \(5min\) >> /opt/couchdb/etc/local.ini \
-# && echo ; Databases less than 256K in size will not be compacted >> /opt/couchdb/etc/local.ini \
+# Database compaction settings.
+# Databases will be checked every 300s
+# Databases less than 256K in size will not be compacted
  && echo [compaction_daemon] >> /opt/couchdb/etc/local.ini \
  && echo check_interval = 300 >> /opt/couchdb/etc/local.ini \
  && echo min_file_size = 256000 >> /opt/couchdb/etc/local.ini \
