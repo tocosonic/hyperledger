@@ -11,5 +11,6 @@ RUN wget -O /app/.lein/self-installs/leiningen-2.7.1-standalone.jar https://gith
 RUN chown -R :0 /app \
  && chmod -R g+w /app
 RUN sed -i 's/export.LEIN.HOME.*$/export LEIN_HOME=\"\/app\/.lein\"/' /usr/local/bin/lein
+RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 EXPOSE 8080
 ENV LEIN_ROOT=false

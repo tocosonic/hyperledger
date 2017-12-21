@@ -19,4 +19,5 @@ RUN yum -y install nano \
  && yum -y install git \
  && yum -y install golang \
  && yum -y upgrade
+RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 VOLUME /projects

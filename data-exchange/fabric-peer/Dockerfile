@@ -19,6 +19,7 @@ RUN apt-get -y update \
  && apt-get -y install joe \
  && apt-get -y install less\
  && apt-get -y install telnet
+RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 VOLUME /pvc/fabric-peer01-host
 VOLUME /pvc/fabric-peer01-fabric
 VOLUME /pvc/fabric-peer02-host

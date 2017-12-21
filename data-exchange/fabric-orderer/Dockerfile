@@ -23,6 +23,7 @@ RUN apt-get -y update \
  && apt-get -y install joe \
  && apt-get -y install less\
  && apt-get -y install telnet
+RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 VOLUME /pvc/fabric-orderer11-channel-artifacts
 VOLUME /pvc/fabric-orderer11-msp
 VOLUME /pvc/fabric-orderer11-fabric

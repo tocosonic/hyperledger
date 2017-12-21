@@ -4,6 +4,14 @@ RUN mkdir /scripts \
  && chmod -R a+w /etc/hyperledger \
  && chown -R :0 /scripts \
  && chmod -R a+w /scripts
+RUN apt-get -y update \
+ && apt-get -y upgrade \
+ && apt-get -y install rsync \
+ && apt-get -y install nano \
+ && apt-get -y install joe \
+ && apt-get -y install less\
+ && apt-get -y install telnet
+RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 EXPOSE 7054
 VOLUME /etc/hyperledger/fabric-ca-server-config
 VOLUME /etc/hyperledger/fabric-ca-server

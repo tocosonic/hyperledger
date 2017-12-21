@@ -15,6 +15,7 @@ RUN apt-get -y update \
  && apt-get -y install joe \
  && apt-get -y install less\
  && apt-get -y install telnet
+RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 VOLUME /pvc/fabric-ca1-server
 VOLUME /pvc/fabric-ca1-server-config
 VOLUME /pvc/fabric-ca2-server

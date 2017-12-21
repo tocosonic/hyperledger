@@ -11,3 +11,4 @@ RUN chown -R :0 /data \
  && echo '#/bin/bash' > /zooReady.sh \
  && echo 'if [ $(echo ruok | nc 127.0.0.1 $1) == "imok" ]; then exit 0; else exit 1; fi' >> /zooReady.sh \
  && chmod +x /zooReady.sh
+RUN echo alias ll='ls -l --color=auto' >> /etc/profile
