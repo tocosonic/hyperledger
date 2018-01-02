@@ -16,7 +16,6 @@ RUN yum -y install nano \
  && yum -y install gcc.x86_64 \
  && yum -y install ant \
  && yum -y install maven \
-# && yum -y install git \
  && yum -y install golang \
  && yum -y install wget \
  && yum -y upgrade
@@ -47,4 +46,14 @@ RUN touch /.gitconfig \
 RUN yum -y remove git
 RUN rm -rf /tmp/src
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
+RUN ln -s /usr/local/git/bin/git /usr/local/bin/git \
+ && ln -s /usr/local/git/bin/git-shell /usr/local/bin/git-shell \
+ && ln -s /usr/local/git/bin/gitk /usr/local/bin/gitk \
+ && ln -s /usr/local/git/bin/git-receive-pack /usr/local/bin/git-receive-pack \
+ && ln -s /usr/local/git/bin/git-upload-archive /usr/local/bin/git-upload-archive \
+ && ln -s /usr/local/git/bin/git-upload-pack /usr/local/bin/git-upload-pack
+RUN cp /root/.bash* / \
+ && chown -R :0 /.bash* \
+ && chmod -R g+rw /.bash* \
+ && chmod -R o+r /.bash*
 VOLUME /projects
