@@ -19,6 +19,7 @@ RUN yum -y install nano \
  && yum -y install git \
  && yum -y install golang \
  && yum -y install python34 \
+ && yum -y install wget \
  && yum -y upgrade
 RUN wget https://bootstrap.pypa.io/get-pip.py \
  && python get-pip.py
