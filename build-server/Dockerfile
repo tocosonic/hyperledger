@@ -18,15 +18,16 @@ RUN yum -y install nano \
  && yum -y install maven \
  && yum -y install git \
  && yum -y install golang \
- && yum -y install python34 \
  && yum -y install wget \
  && yum -y upgrade
+RUN yum -y install python34
 RUN wget https://bootstrap.pypa.io/get-pip.py \
  && python get-pip.py --no-wheel
-RUN pip install --upgrade pip \
- && pip install behave nose docker-compose \
- && pip install -I flask==0.10.1 python-dateutil==2.2 pytz==2014.3 pyyaml==3.10 couchdb==1.0 flask-cors==2.0.1 requests==2.4.3 pyOpenSSL==16.2.0 pysha3==1.0b1 grpcio==1.0.4 \
- && pip install urllib3 ndg-httpsclient pyasn1 ecdsa python-slugify grpcio-tools jinja2 b3j0f.aop six
+RUN pip install --upgrade pip
+RUN pip install behave nose docker-compose
+#RUN pip install -I flask==0.10.1 python-dateutil==2.2 pytz==2014.3 pyyaml==3.10 couchdb==1.0 flask-cors==2.0.1 requests==2.4.3 pyOpenSSL==16.2.0 pysha3==1.0.2 grpcio==1.0.4
+RUN pip install -I flask==0.12.2 python-dateutil==2.6.1 pytz==2017.3 pyyaml==3.12 couchdb==1.1 flask-cors==3.0.3 requests==2.18.4 pyOpenSSL==17.5.0 pysha3==1.0.2 grpcio==1.8.2
+RUN pip install urllib3 ndg-httpsclient pyasn1 ecdsa python-slugify grpcio-tools jinja2 b3j0f.aop six
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 VOLUME /projects
