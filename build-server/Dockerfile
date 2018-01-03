@@ -18,6 +18,10 @@ RUN yum -y install nano \
  && yum -y install maven \
  && yum -y install golang \
  && yum -y install wget \
+ && yum -y install screen.x86_64 \
+ && yum -y install libtool-ltdl-devel \
+ && yum -y install docker.x86_64 \
+ && yum -y install which \
  && yum -y upgrade
 RUN yum -y install python34
 RUN yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
@@ -52,8 +56,10 @@ RUN ln -s /usr/local/git/bin/git /usr/local/bin/git \
  && ln -s /usr/local/git/bin/git-receive-pack /usr/local/bin/git-receive-pack \
  && ln -s /usr/local/git/bin/git-upload-archive /usr/local/bin/git-upload-archive \
  && ln -s /usr/local/git/bin/git-upload-pack /usr/local/bin/git-upload-pack
+RUN touch /.bash_history
 RUN cp /root/.bash* / \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
- && chmod -R o+r /.bash*
+ && chmod -R o+r /.bash* \
+ && echo PS1="[\\h \\W]\\$ " >> /.bashrc
 VOLUME /projects
