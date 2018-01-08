@@ -10,12 +10,12 @@ RUN apt-get -y install nano \
 #RUN apt-get -y --ignore-missing dist-upgrade
 #RUN apt-get -y --ignore-missing dist-upgrade
 RUN cp /root/.bash* / \
+ && touch /.bash_history \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
- && echo alias ll='ls -l --color=auto' >> /etc/profile \
- && touch /.bash_history 
+ && echo alias ll='ls -l --color=auto' >> /etc/profile 
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
