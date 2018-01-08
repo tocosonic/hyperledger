@@ -16,7 +16,7 @@ RUN cp /root/.bash* / \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
  && echo alias ll='ls -l --color=auto' >> /etc/profile \
  && touch /.bash_history 
-VOLUME /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+VOLUME /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
