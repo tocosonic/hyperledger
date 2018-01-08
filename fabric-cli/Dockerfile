@@ -2,11 +2,13 @@ FROM hyperledger/fabric-tools:x86_64-1.1.0-preview
 RUN chown -R :0 /opt/gopath \
  && chmod -R a+w /opt/gopath
 RUN apt-get -y update
-RUN apt-get -y --fix-missing dist-upgrade
+RUN apt-get -y --ignore-missing dist-upgrade
 RUN apt-get -y install nano \
  && apt-get -y install joe \
  && apt-get -y install less\
  && apt-get -y install telnet
+RUN apt-get -y --ignore-missing dist-upgrade
+RUN apt-get -y --ignore-missing dist-upgrade
 RUN cp /root/.bash* / \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
