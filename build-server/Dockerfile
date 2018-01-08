@@ -61,7 +61,8 @@ RUN cp /root/.bash* / \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
- && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc
+ && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
+ && echo cd /projects/go/src/github.com/hyperledger >> /.bashrc
 RUN chown -R :0 /var/run \
  && chmod -R g+rwx /var/run \
  && chmod -R o+rx /var/run
