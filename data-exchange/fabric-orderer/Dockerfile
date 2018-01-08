@@ -21,7 +21,7 @@ RUN touch /.bash_history \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
- && echo cd /projects/go/src/github.com/hyperledger >> /.bashrc
+ && echo cd /pvc >> /.bashrc
 VOLUME /pvc/fabric-orderer-channel-artifacts
 VOLUME /pvc/fabric-orderer-msp
 VOLUME /pvc/fabric-orderer-fabric
