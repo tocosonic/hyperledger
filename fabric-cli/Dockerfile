@@ -19,5 +19,5 @@ RUN cp /root/.bash* / \
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
-VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
 WORKDIR /opt/gopath/src/github.com/hyperledger/fabric/peer
