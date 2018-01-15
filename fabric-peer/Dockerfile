@@ -1,11 +1,5 @@
 FROM hyperledger/fabric-peer:x86_64-1.1.0-preview
-RUN mkdir /host \
- && mkdir /scripts \
- && chown -R :0 /host \
- && chmod -R a+w /host \
- && chown -R :0 /scripts \
- && chmod -R a+w /scripts \
- && chown -R :0 /etc/hyperledger \
+RUN chown -R :0 /etc/hyperledger \
  && chmod -R a+w /etc/hyperledger \
  && chown -R :0 /var/hyperledger \
  && chmod -R a+w /var/hyperledger
@@ -17,9 +11,15 @@ RUN apt-get -y update \
  && apt-get -y install less\
  && apt-get -y install telnet
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
+RUN touch /.bash_history \
+ && cp /root/.bash* / \
+ && chown -R :0 /.bash* \
+ && chmod -R g+rw /.bash* \
+ && chmod -R o+r /.bash* \
+ && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
+ && echo cd /etc/hyperledger >> /.bashrc
 EXPOSE 7051 7052 7053
-VOLUME /host/var/run
-VOLUME /etc/hyperledger/fabric
-VOLUME /scripts
+VOLUME /etc/hyperledger/fabric/msp
+VOLUME /etc/hyperledger/fabric/tls
 #WORKDIR /opt/gopath/src/github.com/hyperledger/fabric/peer
 CMD peer node start
