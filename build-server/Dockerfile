@@ -4,7 +4,8 @@ RUN mkdir /projects \
  && chown -R :0 /projects \
  && chmod -R g+rwx /projects \
  && chmod -R o+rx /projects
-RUN yum -y install nano \
+RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
+ && yum -y install nano \
  && yum -y install epel-release \
  && yum -y install joe \
  && yum -y install man \
