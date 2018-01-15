@@ -3,7 +3,6 @@ FROM hyperledger/fabric-orderer:x86_64-1.1.0-preview
 RUN mkdir /pvc \
  && mkdir /pvc/fabric-orderer-channel-artifacts \
  && mkdir /pvc/fabric-orderer-msp \
- && mkdir /pvc/fabric-orderer-fabric \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc \
  && chmod -R o+rx /pvc
@@ -24,6 +23,5 @@ RUN touch /.bash_history \
  && echo cd /pvc >> /.bashrc
 VOLUME /pvc/fabric-orderer-channel-artifacts
 VOLUME /pvc/fabric-orderer-msp
-VOLUME /pvc/fabric-orderer-fabric
 ENTRYPOINT []
 CMD []
