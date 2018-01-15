@@ -22,6 +22,8 @@ RUN yum -y install nano \
  && yum -y install libtool-ltdl-devel \
  && yum -y install docker.x86_64 \
  && yum -y install which \
+ && yum -y install net-tools \
+ && yum -y install iproute \
  && yum -y upgrade
 RUN yum -y install python34
 RUN yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
