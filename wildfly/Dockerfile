@@ -2,7 +2,7 @@ FROM jboss/wildfly
 RUN chown -R :0 /opt/jobss \
  && chmod -R g+rwx /opt/jobss \
  && chmod -R o+rx /opt/jobss
-RUN echo alias ll='ls -l --color=auto' >> /etc/profile
+#RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \
  && cp /root/.bash* / \
  && chown -R :0 /.bash* \
