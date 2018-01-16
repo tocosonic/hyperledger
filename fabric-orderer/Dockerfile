@@ -21,4 +21,5 @@ RUN touch /.bash_history \
 EXPOSE 7050
 VOLUME /var/hyperledger/orderer/channel-artifacts
 VOLUME /var/hyperledger/orderer/msp
+VOLUME /var/hyperledger/orderer/tls
 CMD orderer start
