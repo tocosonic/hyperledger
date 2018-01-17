@@ -32,4 +32,3 @@ RUN touch /.bash_history \
  && chmod -R o+r /.bash* \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
  && echo cd /opt/jboss >> /.bashrc
-EXPOSE 8080 9990
