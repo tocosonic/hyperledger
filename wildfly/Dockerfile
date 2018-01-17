@@ -32,3 +32,6 @@ RUN touch /.bash_history \
  && chmod -R o+r /.bash* \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
  && echo cd /opt/jboss >> /.bashrc
+
+VOLUME /opt/jboss/wildfly/standalone/deployments
+VOLUME /usr/lib/safelog
