@@ -8,6 +8,7 @@ RUN chown -R :0 /opt/jboss \
  && chmod -R o+rx /usr/lib
 
 RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
+ && yum --disablerepo=extras \
  && yum -y install nano \
  && yum -y install epel-release \
  && yum -y install joe \
