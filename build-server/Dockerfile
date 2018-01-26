@@ -1,9 +1,13 @@
 FROM centos:latest
 # Prepare PVC moint points
 RUN mkdir /projects \
+ && mkdir /fabric-bin \
  && chown -R :0 /projects \
  && chmod -R g+rwx /projects \
- && chmod -R o+rx /projects
+ && chmod -R o+rx /projects \
+ && chown -R :0 /fabric-bin \
+ && chmod -R g+rwx /fabric-bin \
+ && chmod -R o+rx /fabric-bin
 RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
  && yum -y install nano \
  && yum -y install epel-release \
@@ -18,7 +22,9 @@ RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
  && yum -y install ant \
  && yum -y install maven \
  && yum -y install golang \
+ && yum -y install bzip2 \
  && yum -y install wget \
+ && yum -y install libtool-ltdl-devel \
  && yum -y install screen.x86_64 \
  && yum -y install libtool-ltdl-devel \
  && yum -y install docker.x86_64 \
