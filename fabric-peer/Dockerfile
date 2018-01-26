@@ -24,5 +24,4 @@ EXPOSE 7051 7052 7053
 VOLUME /etc/hyperledger/fabric/msp
 VOLUME /etc/hyperledger/fabric/tls
 VOLUME /var/hyperledger/bin
-#WORKDIR /opt/gopath/src/github.com/hyperledger/fabric/peer
 CMD peer node start
