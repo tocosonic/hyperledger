@@ -76,3 +76,4 @@ RUN chown -R :0 /var/run \
  && chmod -R g+rwx /var/run \
  && chmod -R o+rx /var/run
 VOLUME /projects
+VOLUME /fabric-bin
