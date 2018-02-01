@@ -1,11 +1,11 @@
 FROM hyperledger/fabric-baseimage:x86_64-0.4.2
-RUN mkdir -p /chaincode/input /chaincode/output /chaincode/bin /chaincode/src
 
 # ENV PATH=/chaincode/bin
 # ENV GOROOT=???
 ENV GOPATH=/chaincode/input
 
-RUN chown -R :0 /chaincode \
+RUN mkdir -p /chaincode/input /chaincode/input/src /chaincode/output /chaincode/bin /chaincode/exchange \
+ && chown -R :0 /chaincode \
  && chmod -R g+rw /chaincode \
  && chown -R :0 /root \
  && chmod -R g+rw /root
@@ -28,13 +28,13 @@ RUN touch /.bash_history \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
  && echo cd /chaincode >> /.bashrc
 
-ADD payload/goshim.tar.bz2 $GOPATH/src/
-COPY payload/chaintool payload/protoc-gen-go /usr/local/bin/
- 
 LABEL org.hyperledger.fabric.version=1.1.0-preview \
       org.hyperledger.fabric.base.version=0.4.2
 
-VOLUME /chaincode/src
+ADD payload/goshim.tar.bz2 $GOPATH/src/
+COPY payload/chaintool payload/protoc-gen-go /usr/local/bin/
+
+VOLUME /chaincode/exchange
 
 # add vars to the deployment configuration
 # CORE_CHAINCODE_ID_NAME=mycc7:0.1		request.name:request.version OR CCID.name:CCID.version

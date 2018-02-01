@@ -11,8 +11,11 @@ RUN ln -s /opt/gradle-2.12/bin/gradle /usr/bin
 RUN mkdir /root/chaincode \
  && mkdir /root/libs \
  && mkdir /root/.m2 \
+ && mkdir -p /chaincode/exchange \
  && chown -R :0 /root \
- && chmod -R g+rw /root
+ && chmod -R g+rw /root \
+ && chown -R :0 /chaincode \
+ && chmod -R g+rw /chaincode
 
 ENV MAVEN_VERSION=3.3.9
 ENV USER_HOME_DIR="/root"
@@ -55,9 +58,4 @@ ADD payload/settings.gradle /root
 # Build java shim after copying proto files from fabric/proto
 RUN /root/core/chaincode/shim/java/javabuild.sh
 
-#RUN mkdir /tmp/root \
-# && cp -r /root /tmp/ \
-# && chown -R :0 /tmp/root \
-# && chmod -R g+rw /tmp/root
-
-VOLUME /chaincode
+VOLUME /chaincode/exchange
