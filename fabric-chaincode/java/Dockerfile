@@ -8,17 +8,15 @@ RUN curl -sSL https://services.gradle.org/distributions/gradle-2.12-bin.zip > /t
 RUN unzip -qo /tmp/gradle-2.12-bin.zip -d /opt && rm /tmp/gradle-2.12-bin.zip
 RUN ln -s /opt/gradle-2.12/bin/gradle /usr/bin
 
-RUN mkdir /root/chaincode \
- && mkdir /root/libs \
- && mkdir /root/.m2 \
+RUN mkdir -p /chaincode/root/chaincode \
+ && mkdir -p /chaincode/root/libs \
  && mkdir -p /chaincode/exchange \
- && chown -R :0 /root \
- && chmod -R g+rw /root \
+ && mkdir -p /chaincode/root/.m2 \
  && chown -R :0 /chaincode \
  && chmod -R g+rw /chaincode
 
 ENV MAVEN_VERSION=3.3.9
-ENV USER_HOME_DIR="/root"
+ENV USER_HOME_DIR="/chaincode/root"
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL http://www-us.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
@@ -51,11 +49,11 @@ WORKDIR /root
 LABEL org.hyperledger.fabric.version=1.1.0-preview \
       org.hyperledger.fabric.base.version=0.4.2
 
-ADD payload/javashim.tar.bz2 /root
-ADD payload/protos.tar.bz2 /root
-ADD payload/settings.gradle /root
+ADD payload/javashim.tar.bz2 /chaincode/root
+ADD payload/protos.tar.bz2 /chaincode/root
+ADD payload/settings.gradle /chaincode/root
 
 # Build java shim after copying proto files from fabric/proto
-RUN /root/core/chaincode/shim/java/javabuild.sh
+RUN /chaincode/root/core/chaincode/shim/java/javabuild.sh
 
 VOLUME /chaincode/exchange
