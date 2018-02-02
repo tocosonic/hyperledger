@@ -1,8 +1,8 @@
 FROM hyperledger/fabric-baseimage:x86_64-0.4.2
 
-# ADD codepackage.tgz to /root/chaincode
-# cp /root/chaincode/src/build/chaincode.jar /root
-# cp /root/chaincode/src/build/libs/* /root/libs
+# ADD codepackage.tgz to /chaincode/root/chaincode
+# cp /chaincode/root/chaincode/src/build/chaincode.jar /chaincode/root
+# cp /chaincode/root/chaincode/src/build/libs/* /chaincode/root/libs
 
 RUN curl -sSL https://services.gradle.org/distributions/gradle-2.12-bin.zip > /tmp/gradle-2.12-bin.zip
 RUN unzip -qo /tmp/gradle-2.12-bin.zip -d /opt && rm /tmp/gradle-2.12-bin.zip
@@ -44,7 +44,7 @@ RUN touch /.bash_history \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
  && echo cd /chaincode >> /.bashrc
 
-WORKDIR /root
+WORKDIR /chaincode/root
 
 LABEL org.hyperledger.fabric.version=1.1.0-preview \
       org.hyperledger.fabric.base.version=0.4.2
