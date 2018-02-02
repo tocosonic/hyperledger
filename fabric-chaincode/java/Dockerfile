@@ -8,8 +8,8 @@ RUN curl -sSL https://services.gradle.org/distributions/gradle-2.12-bin.zip > /t
 RUN unzip -qo /tmp/gradle-2.12-bin.zip -d /opt && rm /tmp/gradle-2.12-bin.zip
 RUN ln -s /opt/gradle-2.12/bin/gradle /usr/bin
 
-RUN mkdir -p /chaincode/root/chaincode \
- && mkdir -p /chaincode/root/libs \
+RUN mkdir -p /root/chaincode \
+ && mkdir -p /root/libs \
  && mkdir -p /chaincode/exchange \
  && mkdir -p /chaincode/root/.m2 \
  && chown -R :0 /chaincode \
@@ -44,16 +44,20 @@ RUN touch /.bash_history \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
  && echo cd /chaincode >> /.bashrc
 
-WORKDIR /chaincode/root
+WORKDIR /root
 
 LABEL org.hyperledger.fabric.version=1.1.0-preview \
       org.hyperledger.fabric.base.version=0.4.2
 
-ADD payload/javashim.tar.bz2 /chaincode/root
-ADD payload/protos.tar.bz2 /chaincode/root
-ADD payload/settings.gradle /chaincode/root
+ADD payload/javashim.tar.bz2 /root
+ADD payload/protos.tar.bz2 /root
+ADD payload/settings.gradle /root
 
 # Build java shim after copying proto files from fabric/proto
-RUN /chaincode/root/core/chaincode/shim/java/javabuild.sh
+RUN /root/core/chaincode/shim/java/javabuild.sh
 
+# now copy root to /chaincode (it won't compile in /chaincode/root)
+RUN cp -r /root/* /chaincode/root/
+
+WORKDIR /chaincode/root
 VOLUME /chaincode/exchange
