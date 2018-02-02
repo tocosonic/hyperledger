@@ -57,7 +57,10 @@ ADD payload/settings.gradle /root
 RUN /root/core/chaincode/shim/java/javabuild.sh
 
 # now copy root to /chaincode (it won't compile in /chaincode/root)
-RUN cp -r /root/* /chaincode/root/
+# and apply access rights again, because the extracted archive and compiled class files are having root's default rights
+RUN cp -r /root/* /chaincode/root/ \
+ && chown -R :0 /chaincode \
+ && chmod -R g+rw /chaincode
 
 WORKDIR /chaincode/root
 VOLUME /chaincode/exchange
