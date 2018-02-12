@@ -1,6 +1,10 @@
 FROM hyperledger/fabric-baseimage:x86_64-0.4.2
 
 # ADD codepackage.tgz to /chaincode/root/chaincode
+# Build using either gradle or maven
+# cd /chaincode/root/chaincode/src
+# Gradle: gradle -b build.gradle clean && gradle -b build.gradle build
+# Maven:  mvn -f pom.xml clean && mvn -f pom.xml package
 # cp /chaincode/root/chaincode/src/build/chaincode.jar /chaincode/root
 # cp /chaincode/root/chaincode/src/build/libs/* /chaincode/root/libs
 

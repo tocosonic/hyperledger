@@ -11,6 +11,7 @@ RUN apt-get -y update \
  && apt-get -y install nano \
  && apt-get -y install joe \
  && apt-get -y install less\
+ && apt-get -y install p7zip-full \
  && apt-get -y install telnet
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \
