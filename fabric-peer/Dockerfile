@@ -4,7 +4,8 @@ RUN mkdir /var/hyperledger/bin \
  && chmod -R a+w /etc/hyperledger \
  && chown -R :0 /var/hyperledger \
  && chmod -R a+w /var/hyperledger
-RUN apt-get -y update \
+RUN echo "deb http://de.archive.ubuntu.com/ubuntu bionic main universe" >> /etc/apt/sources.list \
+ && apt-get -y update \
  && apt-get -y upgrade \
  && apt-get -y install libltdl7 \
  && apt-get -y install rsync \
