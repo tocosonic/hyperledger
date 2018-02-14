@@ -1,5 +1,6 @@
 FROM hyperledger/fabric-peer:x86_64-1.1.0-preview
 RUN mkdir /var/hyperledger/bin \
+ && mkdir /var/hyperledger/chaincode \
  && chown -R :0 /etc/hyperledger \
  && chmod -R a+w /etc/hyperledger \
  && chown -R :0 /var/hyperledger \
@@ -26,4 +27,5 @@ EXPOSE 7051 7052 7053
 VOLUME /etc/hyperledger/fabric/msp
 VOLUME /etc/hyperledger/fabric/tls
 VOLUME /var/hyperledger/bin
+VOLUME /var/hyperledger/chaincode
 CMD peer node start
