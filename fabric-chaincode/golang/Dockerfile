@@ -45,5 +45,5 @@ VOLUME /chaincode/exchange
 # build the go chaincode
 #  CCBIN		cds.ChaincodeSpec.ChaincoceId.Path
 # 		=> see platform.go#56
-#  $GOPATH go build -ldflags "-linkmode external -extldflags '-static'" -o /chaincode/bin $CCBIN
+#  $GOPATH go build -ldflags "-linkmode external -extldflags '-static'" -o /chaincode/bin/chaincode $CCBIN
 # copy contents of binpackage.tar to /chaincode/bin (this is the compiled chaincode)
