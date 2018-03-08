@@ -74,7 +74,7 @@ RUN cp /root/.bash* / \
  && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
  && echo cd /projects/infrastructure/hyperledger-fabric-setup >> /.bashrc \
  && echo export no_proxy=$no_proxy,10.104.204.110 >> /.bashrc \
- && echo export NO_PROXY=$no_proxy >> /.bashrc
+ && echo export NO_PROXY=$no_proxy,10.104.204.110 >> /.bashrc
 RUN chown -R :0 /var/run \
  && chmod -R g+rwx /var/run \
  && chmod -R o+rx /var/run
