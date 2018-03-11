@@ -14,7 +14,7 @@ RUN cp /root/.bash* / \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
- && echo PS1=\"[\\\\h \\\\W]\\\\$ \" >> /.bashrc \
+ && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
  && echo alias ll='ls -l --color=auto' >> /etc/profile 
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/
 VOLUME /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/

@@ -71,9 +71,7 @@ RUN cp /root/.bash* / \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
- && echo PS1=\"\\[\\w\\]\\n\\u@\\h:\\\\$ \" >> \.bashrc \
-# && echo PS1="\\[\\w\\]\\n\\u\\@\\h\\\\$ " >> \.bashrc \
-# && echo PS1=\"[\\\\h]\\\\$ \" >> /.bashrc \
+ && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
  && echo cd /projects/infrastructure/hyperledger-fabric-setup >> /.bashrc \
  && echo export no_proxy=$no_proxy,10.104.204.110 >> /.bashrc \
  && echo export NO_PROXY=$no_proxy,10.104.204.110 >> /.bashrc
