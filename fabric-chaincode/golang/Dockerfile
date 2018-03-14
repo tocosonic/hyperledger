@@ -33,6 +33,7 @@ LABEL org.hyperledger.fabric.version=1.1.0-preview \
 
 ADD payload/goshim.tar.bz2 $GOPATH/src/
 COPY payload/chaintool payload/protoc-gen-go /usr/local/bin/
+COPY payload/build-and-run.sh /chaincode/
 
 VOLUME /chaincode/exchange
 
