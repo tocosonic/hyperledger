@@ -1,2 +1,2 @@
 # hyperledger
-Prepare Hyperledger's Docker images for use with OpenShift
+Prepare Docker images required to setup Hyperledger-Fabric for use with OpenShift
