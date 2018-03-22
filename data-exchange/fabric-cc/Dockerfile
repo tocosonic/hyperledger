@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-orderer:x86_64-1.1.0-preview
+FROM hyperledger/fabric-orderer:x86_64-1.1.0
 # Prepare PVC moint points
 RUN mkdir -p /pvc/fabric-cc \
  && chown -R :0 /pvc \

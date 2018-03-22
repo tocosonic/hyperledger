@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-peer:x86_64-1.1.0-preview
+FROM hyperledger/fabric-peer:x86_64-1.1.0
 # Prepare PVC moint points
 RUN mkdir /pvc \
  && mkdir /pvc/fabric-peer-msp \
