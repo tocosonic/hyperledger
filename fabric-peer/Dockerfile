@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-peer:x86_64-1.1.0-preview
+FROM hyperledger/fabric-peer:x86_64-1.1.0
 RUN mkdir /var/hyperledger/bin \
  && mkdir /var/hyperledger/chaincode \
  && chown -R :0 /etc/hyperledger \

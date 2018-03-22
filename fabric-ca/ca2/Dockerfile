@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-ca:x86_64-1.1.0-preview
+FROM hyperledger/fabric-ca:x86_64-1.1.0
 RUN mkdir /scripts \
  && chown -R :0 /etc/hyperledger \
  && chmod -R a+w /etc/hyperledger \

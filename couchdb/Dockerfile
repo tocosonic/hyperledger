@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-couchdb:x86_64-1.1.0-preview
+FROM hyperledger/fabric-couchdb:x86_64-1.0.6
 #Perform a system upgrade
 RUN apt-get -y update \
  && apt-get -y upgrade \

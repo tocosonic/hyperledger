@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-baseimage:x86_64-0.4.2
+FROM hyperledger/fabric-baseimage:x86_64-0.4.6
 
 # ENV PATH=/chaincode/bin
 # ENV GOROOT=???

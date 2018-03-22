@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-baseimage:x86_64-0.4.2
+FROM hyperledger/fabric-baseimage:x86_64-0.4.6
 
 # ADD codepackage.tgz to /chaincode/root/chaincode
 # Build using either gradle or maven
