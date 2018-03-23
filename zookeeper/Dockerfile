@@ -3,8 +3,8 @@ RUN chown -R :0 /data \
  && chmod -R g+w /data \
  && chown -R :0 /datalog \
  && chmod -R g+w /datalog\
- && chown -R :0 /zookeeper-3.4.9 \
- && chmod -R g+w /zookeeper-3.4.9 \
+ && chown -R :0 /zookeeper-3.4.10 \
+ && chmod -R g+w /zookeeper-3.4.10 \
  && chown -R :0 /conf \
  && chmod -R g+w /conf \
  && sed -i 's/\"\$1\".*\=/"1" =/' /docker-entrypoint.sh \
