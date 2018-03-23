@@ -1,4 +1,5 @@
 FROM hyperledger/fabric-zookeeper:x86_64-1.0.6
+
 RUN chown -R :0 /data \
  && chmod -R g+w /data \
  && chown -R :0 /datalog \
