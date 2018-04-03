@@ -66,5 +66,7 @@ RUN cp -r /root/* /chaincode/root/ \
  && chown -R :0 /chaincode \
  && chmod -R g+rw /chaincode
 
+COPY payload/build-and-run.sh /chaincode/
+
 WORKDIR /chaincode/root
 VOLUME /chaincode/exchange
