@@ -50,8 +50,8 @@ RUN touch /.bash_history \
 
 WORKDIR /root
 
-LABEL org.hyperledger.fabric.version=1.1.0-preview \
-      org.hyperledger.fabric.base.version=0.4.2
+LABEL org.hyperledger.fabric.version=1.1.0 \
+      org.hyperledger.fabric.base.version=0.4.6
 
 ADD payload/javashim.tar.bz2 /root
 ADD payload/protos.tar.bz2 /root
