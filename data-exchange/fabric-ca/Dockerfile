@@ -1,10 +1,8 @@
 FROM hyperledger/fabric-orderer:x86_64-1.1.0
 # Prepare PVC moint points
 RUN mkdir /pvc \
- && mkdir /pvc/fabric-ca1-server \
- && mkdir /pvc/fabric-ca1-server-config \
- && mkdir /pvc/fabric-ca2-server \
- && mkdir /pvc/fabric-ca2-server-config \
+ && mkdir /pvc/fabric-ca-server \
+ && mkdir /pvc/fabric-ca-server-config \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc \
  && chmod -R o+rx /pvc
@@ -18,9 +16,7 @@ RUN apt-get -y update \
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bashrc
 RUN echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc
-VOLUME /pvc/fabric-ca1-server
-VOLUME /pvc/fabric-ca1-server-config
-VOLUME /pvc/fabric-ca2-server
-VOLUME /pvc/fabric-ca2-server-config
+VOLUME /pvc/fabric-ca-server
+VOLUME /pvc/fabric-ca-server-config
 ENTRYPOINT []
 CMD []
