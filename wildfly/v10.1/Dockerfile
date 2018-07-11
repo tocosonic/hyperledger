@@ -1,4 +1,4 @@
-FROM jboss/wildfly
+FROM jboss/wildfly:10.1.0.Final
 USER root
 RUN chown -R :0 /opt/jboss \
  && chmod -R g+rwx /opt/jboss \
