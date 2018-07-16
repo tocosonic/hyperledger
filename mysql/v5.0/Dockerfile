@@ -7,6 +7,7 @@ RUN apt-get -y update \
  && apt-get -y install nano \
  && apt-get -y install joe \
  && apt-get -y install less\
+ && apt-get -y install procps \
  && apt-get -y install telnet
 
 RUN mkdir -p /var/lib/mysql
