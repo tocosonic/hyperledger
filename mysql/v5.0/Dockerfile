@@ -17,7 +17,11 @@ RUN chown -R :0 /var/lib \
  && chown :0 /entrypoint.sh \
  && chmod g+rw /entrypoint.sh \
  && chown -R :0 /usr/local/bin \
- && chmod -R g+rw /usr/local/bin
+ && chmod -R g+rw /usr/local/bin \
+ && chown -R :0 /var/run/mysql \
+ && chmod -R g+rw /var/run/mysql \
+ && chown -R :0 /etc/mysql \
+ && chmod -R g+rw /etc/mysql
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \
