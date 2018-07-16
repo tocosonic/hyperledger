@@ -18,8 +18,8 @@ RUN chown -R :0 /var/lib \
  && chmod g+rw /entrypoint.sh \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin \
- && chown -R :0 /var/run/mysql \
- && chmod -R g+rw /var/run/mysql \
+ && chown -R :0 /var/run/mysqld \
+ && chmod -R g+rw /var/run/mysqld \
  && chown -R :0 /etc/mysql \
  && chmod -R g+rw /etc/mysql
 
