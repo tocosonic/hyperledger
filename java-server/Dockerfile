@@ -69,6 +69,6 @@ RUN chown -R :0 /mnt \
  && chmod -R o+rx /mnt
 RUN touch /etc/fstab
 RUN chown :0 /etc/fstab \
- && chmod go+rx /etc/fstab
+ && chmod go+rw /etc/fstab
 
 VOLUME /projects
