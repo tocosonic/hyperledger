@@ -67,4 +67,8 @@ RUN cp /root/.bash* / \
 RUN chown -R :0 /mnt \
  && chmod -R g+rwx /mnt \
  && chmod -R o+rx /mnt
+RUN touch /etc/fstab
+RUN chown :0 /etc/fstab \
+ && chmod go+rx /etc/fstab
+
 VOLUME /projects
