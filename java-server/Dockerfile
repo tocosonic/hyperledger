@@ -3,7 +3,7 @@ FROM centos:latest
 RUN mkdir /projects \
  && chown -R :0 /projects \
  && chmod -R g+rwx /projects \
- && chmod -R o+rx /projects \
+ && chmod -R o+rx /projects
 RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
  && yum -y install nano \
  && yum -y install epel-release \
