@@ -14,6 +14,7 @@ RUN mkdir -p /var/run/postgresql \
  && mkdir -p /var/lib/postgresql
 
 COPY payload/entrypoint.sh /
+COPY payload/initdb.sh /
 
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \

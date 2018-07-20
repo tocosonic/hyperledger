@@ -74,7 +74,7 @@ if [ "$1" = 'postgres' ]; then
 			export POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS --waldir $POSTGRES_INITDB_WALDIR"
 		echo "- POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS
 		fi
-		eval "initdb $POSTGRES_INITDB_ARGS"
+		eval "initdb --username=postgres $POSTGRES_INITDB_ARGS"
 
 		# unset/cleanup "nss_wrapper" bits
 #		if [ "${LD_PRELOAD:-}" = '/usr/lib/libnss_wrapper.so' ]; then
@@ -174,4 +174,3 @@ if [ "$1" = 'postgres' ]; then
 	fi
 fi
 
-exec "$@"
