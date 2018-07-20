@@ -34,8 +34,9 @@ RUN chown -R :0 /var/lib \
  && chown -R :0 /usr/lib/postgresql \
  && chmod -R g+rw /usr/lib/postgresql
 
-# && chown -R :0 /etc/mysql \
-# && chmod -R g+rw /etc/mysql
+RUN cd /var/lib/postgresql \
+ && mv data data.init \
+ && cd -
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \
