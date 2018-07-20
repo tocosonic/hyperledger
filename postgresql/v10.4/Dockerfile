@@ -35,7 +35,7 @@ RUN chown -R :0 /var/lib \
  && chmod -R g+rw /usr/lib/postgresql
 
 RUN cd /var/lib/postgresql \
- && mv data data.init \
+ && cp -rf data data.init \
  && cd -
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
