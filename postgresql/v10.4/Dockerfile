@@ -10,6 +10,10 @@ RUN apt-get -y update \
  && apt-get -y install procps \
  && apt-get -y install telnet
 
+RUN mkdir -p /var/run/postgresql \
+ && mkdir -p /var/lib/postgresql
+
+COPY payload/entrypoint.sh /
 
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
@@ -17,8 +21,8 @@ RUN chown -R :0 /var/lib \
  && chmod g+rw /docker-entrypoint.sh \
  && chown -R :0 /usr/local/bin/docker-entrypoint.sh \
  && chmod -R g+rw /usr/local/bin/docker-entrypoint.sh \
- && chown :0 /var/run/postgresql \
- && chmod g+rw /var/run/postgresql \
+ && chown -R :0 /var/run/postgresql \
+ && chmod -R g+rw /var/run/postgresql \
  && chown -R :0 /usr/lib/postgresql \
  && chmod -R g+rw /usr/lib/postgresql
 
