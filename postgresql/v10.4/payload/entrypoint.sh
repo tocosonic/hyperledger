@@ -64,7 +64,7 @@ if [ "$1" = 'postgres' ]; then
 #			export NSS_WRAPPER_GROUP="$(mktemp)"
 #			echo "postgres:x:$(id -u):$(id -g):PostgreSQL:$PGDATA:/bin/false" > "$NSS_WRAPPER_PASSWD"
 #			echo "postgres:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
-		fi
+#		fi
 
 		file_env 'POSTGRES_INITDB_ARGS'
 		echo "- POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS
