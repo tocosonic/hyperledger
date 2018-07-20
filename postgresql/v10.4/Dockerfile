@@ -8,7 +8,8 @@ RUN apt-get -y update \
  && apt-get -y install joe \
  && apt-get -y install less\
  && apt-get -y install procps \
- && apt-get -y install telnet
+ && apt-get -y install telnet \
+ && apt-get -y upgrade
 
 RUN mkdir -p /var/run/postgresql \
  && mkdir -p /var/lib/postgresql
@@ -34,9 +35,15 @@ RUN chown -R :0 /var/lib \
  && chown -R :0 /usr/lib/postgresql \
  && chmod -R g+rw /usr/lib/postgresql
 
-RUN cd /var/lib/postgresql \
+RUN cd /var/lib/postgresql/ \
  && cp -rf data data.init \
  && cd -
+
+RUN ls -l /var/lib/postgresql/data
+RUN ls -l /var/lib/postgresql/data.init
+
+RUN chown -R :0 /var/lib/postgresql \
+ && chmod -R g+rw /var/lib/postgresql
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \

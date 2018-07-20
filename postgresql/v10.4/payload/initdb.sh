@@ -72,7 +72,7 @@ if [ "$1" = 'postgres' ]; then
 		
 		if [ "$POSTGRES_INITDB_WALDIR" ]; then
 			export POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS --waldir $POSTGRES_INITDB_WALDIR"
-		echo "- POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS
+			echo "- POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS
 		fi
 		eval "initdb --username=postgres $POSTGRES_INITDB_ARGS"
 
@@ -168,9 +168,9 @@ if [ "$1" = 'postgres' ]; then
 		PGUSER="${PGUSER:-postgres}" \
 		pg_ctl -D "$PGDATA" -m fast -w stop
 
-		echo
+		echo '-----------------------------------------------------'
 		echo 'PostgreSQL init process complete; ready for start up.'
-		echo
+		echo '-----------------------------------------------------'
 	fi
 fi
 
