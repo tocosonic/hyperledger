@@ -17,6 +17,9 @@ COPY payload/entrypoint.sh /
 
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
+ && chown :0 /entrypoint.sh \
+ && chmod +x /entrypoint.sh \
+ && chmod g+rw /entrypoint.sh \
  && chown :0 /docker-entrypoint.sh \
  && chmod g+rw /docker-entrypoint.sh \
  && chown -R :0 /usr/local/bin/docker-entrypoint.sh \
