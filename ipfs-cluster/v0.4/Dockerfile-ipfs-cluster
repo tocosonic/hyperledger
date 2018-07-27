@@ -1,0 +1,14 @@
+FROM ipfs/ipfs-cluster:fix462
+
+RUN mkdir -p /data/ipfs-cluster
+
+#copy the new startup-script
+COPY files/entrypoint.sh /usr/local/bin/
+
+RUN chown -R :0 /data \
+ && chmod -R g+rw /data \
+ && chown -R :0 /usr/local/bin \
+ && chmod -R g+rw /usr/local/bin
+
+EXPOSE 9094-9096/tcp
+VOLUME /data/ipfs-cluster

@@ -1,0 +1,14 @@
+FROM ipfs/go-ipfs:v0.4.16
+
+RUN mkdir -p /data/ipfs
+
+#copy the new startup-script
+COPY files/start_ipfs /usr/local/bin/
+
+RUN chown -R :0 /data \
+ && chmod -R g+rw /data \
+ && chown -R :0 /usr/local/bin \
+ && chmod -R g+rw /usr/local/bin
+
+EXPOSE 4001/tcp 4002/udp 5001/tcp 8080-8081/tcp
+VOLUME /data/ipfs
