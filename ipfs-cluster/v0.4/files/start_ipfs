@@ -1,19 +1,16 @@
 #!/bin/sh
 set -e
-#user=ipfs
 repo="$IPFS_PATH"
 
 echo "=== start_ipfs called ==="
+if [-e "/data/ipfs/swarm.key" ]; then
+  echo "== swarm.key already exists"
+else
+  echo "== copy swarm.key from /data/ to /data/ipfs/"
+  #this is required during start-up, because /data/ipfs is on a persistent volume which is mounted during initialization of the container.
+  cp /data/swarm.key /data/ipfs/
+fi
 
-#if [ `id -u` -eq 0 ]; then
-#  echo "Changing user to $user"
-#  # ensure folder is writable
-#  su-exec "$user" test -w "$repo" || chown -R -- "$user" "$repo"
-#  # restart script with new privileges
-#  exec su-exec "$user" "$0" "$@"
-#fi
-
-# 2nd invocation with regular user
 echo "== call ipfs version"
 ipfs version
 

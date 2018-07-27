@@ -4,6 +4,7 @@ RUN mkdir -p /data/ipfs
 
 #copy the new startup-script
 COPY files/start_ipfs /usr/local/bin/
+COPY files/swarm.key /data
 
 RUN chown -R :0 /data \
  && chmod -R g+rw /data \
