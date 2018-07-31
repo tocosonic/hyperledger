@@ -1,5 +1,10 @@
 FROM jboss/wildfly:13.0.0.Final
 USER root
+
+#backup configuration and data
+RUN cp -rf /opt/jboss/wildfly/standalone /opt/jboss/wildfly/standalone.bak
+COPY payload/startup.sh /opt/jboss/wildfly/bin/
+
 RUN chown -R :0 /opt/jboss \
  && chmod -R g+rwx /opt/jboss \
  && chmod -R o+rx /opt/jboss \
@@ -34,4 +39,6 @@ RUN touch /.bash_history \
  && echo cd /opt/jboss >> /.bashrc
 
 VOLUME /opt/jboss/wildfly/standalone/deployments
-VOLUME /usr/lib/safelog
+VOLUME /opt/jboss/wildfly/standalone/data
+VOLUME /opt/jboss/wildfly/standalone/configuration
+VOLUME /opt/jboss/wildfly/standalone/log
