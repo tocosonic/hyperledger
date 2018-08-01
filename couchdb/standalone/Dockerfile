@@ -7,6 +7,7 @@ RUN apt-get -y update \
  && apt-get -y install nano \
  && apt-get -y install joe
 #install the most recent version of CouchDB
+RUN apt-get -y install libmozjs185-dev
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
  && curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
 RUN apt-get -y update \
