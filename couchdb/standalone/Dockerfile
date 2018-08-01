@@ -15,6 +15,8 @@ RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
  && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
  && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
 RUN echo "couchdb couchdb/mode select none" | debconf-set-selections
+
+RUN apt-get -y update
 RUN apt-get -y upgrade couchdb
 
 RUN apt-get -y update \
