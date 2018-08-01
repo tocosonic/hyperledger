@@ -13,8 +13,8 @@ RUN apt-get -y update \
  && mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
  && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
  && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
-RUN echo "couchdb couchdb/mode select none" | debconf-set-selections \
- && apt-get -y upgrade couchdb
+RUN echo "couchdb couchdb/mode select none" | debconf-set-selections
+RUN apt-get -y upgrade couchdb
 
 RUN sed -i 's/\[couchdb\]/\[couchdb\]\n\; Specify the location of the database in container.\n\; Optionally\, these directories can be mounted in the host via docker.\ndatabase_dir \= \/opt\/couchdb\/data\/\nview_index_dir \= \/opt\/couchdb\/data\/\nuri_file \= \/opt\/couchdb\/data\/couch.uri\nmax_dbs_open \= 8000\ndelayed_commits \= true\n/' /opt/couchdb/etc/local.ini
 RUN sed -i 's/\[couch_httpd_auth\]/\[couch_httpd_auth\]\niterations \= 1000 \; iterations for password hashing\n/' /opt/couchdb/etc/local.ini
