@@ -22,7 +22,8 @@ RUN apt-get -y clean
 RUN apt-get -y -f install
 RUN dpkg --configure -a
 RUN apt-get -y -f install
-RUN apt-get -u dist-upgrade
+RUN apt -y autoremove
+RUN apt-get -y dist-upgrade
 
 RUN apt-get -y upgrade couchdb
 
