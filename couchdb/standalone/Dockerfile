@@ -6,17 +6,19 @@ FROM hyperledger/fabric-couchdb:x86_64-1.0.6
 # && apt-get -y install rsync \
 # && apt-get -y install nano \
 # && apt-get -y install joe
+
 #install the most recent version of CouchDB
-RUN apt-get -y install libmozjs185-dev
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
  && curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
-RUN apt-get -y update \
- && apt-get -y upgrade \
- && mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
+
+RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
  && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
  && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
 RUN echo "couchdb couchdb/mode select none" | debconf-set-selections
 RUN apt-get -y upgrade couchdb
+
+RUN apt-get -y update \
+ && apt-get -y upgrade 
 
 RUN apt-get -y install rsync \
  && apt-get -y install nano \
