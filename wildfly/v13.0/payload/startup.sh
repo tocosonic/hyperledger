@@ -9,7 +9,7 @@ echo "copy default configuration data"
 cp -nr ${WILDFLY_BASE_DIR}/standalone.bak/configuration/* ${CFG_DIR}/
 
 echo "copy default libs"
-cp -nr ${WILDFLY_BASE_DIR}/lib/* ${LIB_DIR}
+cp -nr ${WILDFLY_BASE_DIR}/standalone.bak/lib/* ${LIB_DIR}
 
 echo "start-up Wildfly..."
 /opt/jboss/wildfly/bin/standalone.sh "$@"
