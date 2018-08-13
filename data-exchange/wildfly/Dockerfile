@@ -5,6 +5,7 @@ RUN mkdir /pvc \
  && mkdir /pvc/configuration \
  && mkdir /pvc/data \
  && mkdir /pvc/log \
+ && mkdir /pvc/lib \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc \
  && chmod -R o+rx /pvc
