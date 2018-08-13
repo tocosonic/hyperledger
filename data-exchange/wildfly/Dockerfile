@@ -27,5 +27,6 @@ VOLUME /pvc/deployments
 VOLUME /pvc/configuration
 VOLUME /pvc/data
 VOLUME /pvc/log
+VOLUME /pvc/lib
 ENTRYPOINT []
 CMD []
