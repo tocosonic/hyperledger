@@ -3,7 +3,11 @@ USER root
 
 #backup configuration and data
 RUN cp -rf /opt/jboss/wildfly/standalone /opt/jboss/wildfly/standalone.bak
+RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main
+
 COPY payload/startup.sh /opt/jboss/wildfly/bin/
+COPY payload/module.xml /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
+COPY payload/mysql-connector-java-5.1.44-bin.jar /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
 
 RUN chown -R :0 /opt/jboss \
  && chmod -R g+rwx /opt/jboss \
