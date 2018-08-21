@@ -1,12 +1,5 @@
 FROM hyperledger/fabric-couchdb:0.4.10
 
-#Perform a system upgrade
-#RUN apt-get -y update \
-# && apt-get -y upgrade \
-# && apt-get -y install rsync \
-# && apt-get -y install nano \
-# && apt-get -y install joe
-
 #install the most recent version of CouchDB
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
  && curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
@@ -27,8 +20,6 @@ RUN apt-get -y dist-upgrade
 
 RUN apt-get -y remove couchdb
 RUN apt-get -y install couchdb
-
-#RUN apt-get -y upgrade couchdb
 
 RUN apt-get -y update \
  && apt-get -y upgrade

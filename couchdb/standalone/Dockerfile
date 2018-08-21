@@ -1,11 +1,4 @@
-FROM hyperledger/fabric-couchdb:x86_64-1.0.6
-
-#Perform a system upgrade
-#RUN apt-get -y update \
-# && apt-get -y upgrade \
-# && apt-get -y install rsync \
-# && apt-get -y install nano \
-# && apt-get -y install joe
+FROM hyperledger/fabric-couchdb:0.4.10
 
 #install the most recent version of CouchDB
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
@@ -27,8 +20,6 @@ RUN apt-get -y dist-upgrade
 
 RUN apt-get -y remove couchdb
 RUN apt-get -y install couchdb
-
-#RUN apt-get -y upgrade couchdb
 
 RUN apt-get -y update \
  && apt-get -y upgrade 
