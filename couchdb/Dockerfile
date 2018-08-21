@@ -1,20 +1,41 @@
-FROM hyperledger/fabric-couchdb:x86_64-1.0.6
+FROM hyperledger/fabric-couchdb:0.4.10
+
 #Perform a system upgrade
-RUN apt-get -y update \
- && apt-get -y upgrade \
- && apt-get -y install rsync \
- && apt-get -y install nano \
- && apt-get -y install joe
+#RUN apt-get -y update \
+# && apt-get -y upgrade \
+# && apt-get -y install rsync \
+# && apt-get -y install nano \
+# && apt-get -y install joe
+
 #install the most recent version of CouchDB
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
  && curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
-RUN apt-get -y update \
- && apt-get -y upgrade \
- && mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
+
+RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
  && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
  && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
 RUN echo "couchdb couchdb/mode select none" | debconf-set-selections
-RUN apt-get -y upgrade couchdb
+
+RUN apt-get -y update
+
+RUN apt-get -y clean
+RUN apt-get -y -f install
+RUN dpkg --configure -a
+RUN apt-get -y -f install
+RUN apt -y autoremove
+RUN apt-get -y dist-upgrade
+
+RUN apt-get -y remove couchdb
+RUN apt-get -y install couchdb
+
+#RUN apt-get -y upgrade couchdb
+
+RUN apt-get -y update \
+ && apt-get -y upgrade
+
+RUN apt-get -y install rsync \
+ && apt-get -y install nano \
+ && apt-get -y install joe
 
 RUN sed -i 's/\[couchdb\]/\[couchdb\]\n\; Specify the location of the database in container.\n\; Optionally\, these directories can be mounted in the host via docker.\ndatabase_dir \= \/opt\/couchdb\/data\/\nview_index_dir \= \/opt\/couchdb\/data\/\nuri_file \= \/opt\/couchdb\/data\/couch.uri\nmax_dbs_open \= 8000\ndelayed_commits \= true\n/' /opt/couchdb/etc/local.ini
 RUN sed -i 's/\[couch_httpd_auth\]/\[couch_httpd_auth\]\niterations \= 1000 \; iterations for password hashing\n/' /opt/couchdb/etc/local.ini
