@@ -1,5 +1,9 @@
 FROM hyperledger/fabric-baseimage:x86_64-0.4.6
 
+# IMPORTANT
+# assign a new tag to the image stream (update build and deployment
+# configuration
+#
 # ADD codepackage.tgz to /chaincode/root/chaincode
 # Build using either gradle or maven
 # cd /chaincode/root/chaincode/src
