@@ -56,7 +56,10 @@ LABEL org.hyperledger.fabric.version=1.1.0 \
 ADD payload/javashim.tar.bz2 /root
 ADD payload/protos.tar.bz2 /root
 ADD payload/settings.gradle /root
-ADD payload/cache.tar /root
+COPY payload/cache.tgz /root
+
+RUN tar xzvf cache.tgz
+RUN rm cache.tgz
 
 # Build java shim after copying proto files from fabric/proto
 RUN /root/core/chaincode/shim/java/javabuild.sh
