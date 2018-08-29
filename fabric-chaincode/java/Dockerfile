@@ -62,9 +62,6 @@ COPY payload/cache.tgz /root
 RUN tar xzvf cache.tgz
 RUN rm cache.tgz
 
-RUN pwd
-RUN tree -a
-
 # Build java shim after copying proto files from fabric/proto
 RUN /root/core/chaincode/shim/java/javabuild.sh
 
@@ -75,8 +72,6 @@ RUN cp -rf /root /chaincode/ \
  && chmod -R g+rw /chaincode
 
 COPY payload/build-and-run.sh /chaincode/
-
-RUN tree -a /chaincode
 
 WORKDIR /chaincode/root
 VOLUME /chaincode/exchange
