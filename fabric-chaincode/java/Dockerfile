@@ -56,6 +56,7 @@ LABEL org.hyperledger.fabric.version=1.1.0 \
 ADD payload/javashim.tar.bz2 /root
 ADD payload/protos.tar.bz2 /root
 ADD payload/settings.gradle /root
+ADD payload/cache.tar /root
 
 # Build java shim after copying proto files from fabric/proto
 RUN /root/core/chaincode/shim/java/javabuild.sh
@@ -63,6 +64,7 @@ RUN /root/core/chaincode/shim/java/javabuild.sh
 # now copy root to /chaincode (it won't compile in /chaincode/root)
 # and apply access rights again, because the extracted archive and compiled class files are having root's default rights
 RUN cp -r /root/* /chaincode/root/ \
+ && cp -r /root/.* /chaincode/root/ \
  && chown -R :0 /chaincode \
  && chmod -R g+rw /chaincode
 
