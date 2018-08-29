@@ -63,8 +63,7 @@ RUN /root/core/chaincode/shim/java/javabuild.sh
 
 # now copy root to /chaincode (it won't compile in /chaincode/root)
 # and apply access rights again, because the extracted archive and compiled class files are having root's default rights
-RUN cp -r /root/* /chaincode/root/ \
- && cp -r /root/.* /chaincode/root/ \
+RUN cp -rf /root /chaincode/ \
  && chown -R :0 /chaincode \
  && chmod -R g+rw /chaincode
 
