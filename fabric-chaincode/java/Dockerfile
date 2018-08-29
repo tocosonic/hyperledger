@@ -36,6 +36,7 @@ RUN apt-get -y update \
  && apt-get -y install rsync \
  && apt-get -y install nano \
  && apt-get -y install joe \
+ && apt-get -y install tree \
  && apt-get -y install less\
  && apt-get -y install telnet
 
@@ -61,6 +62,9 @@ COPY payload/cache.tgz /root
 RUN tar xzvf cache.tgz
 RUN rm cache.tgz
 
+RUN pwd
+RUN tree -a
+
 # Build java shim after copying proto files from fabric/proto
 RUN /root/core/chaincode/shim/java/javabuild.sh
 
@@ -71,6 +75,8 @@ RUN cp -rf /root /chaincode/ \
  && chmod -R g+rw /chaincode
 
 COPY payload/build-and-run.sh /chaincode/
+
+RUN tree -a /chaincode
 
 WORKDIR /chaincode/root
 VOLUME /chaincode/exchange
