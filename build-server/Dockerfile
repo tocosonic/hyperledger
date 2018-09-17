@@ -14,6 +14,7 @@ RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
  && yum -y install joe \
  && yum -y install man \
  && yum -y install telnet \
+ && yum -y install tree \
  && yum -y install rsync \
  && yum -y install java-1.8.0-openjdk.x86_64 \
  && yum -y install java-1.8.0-openjdk-javadoc-zip.noarch \
