@@ -1,4 +1,4 @@
-FROM:swaggerapi/swagger-editor:v3.6.11
+FROM swaggerapi/swagger-editor:v3.6.11
 
 RUN chown -R :0 /etc/nginx/ \
  && chown -R :0 /usr/lib/nginx/ \

@@ -1,4 +1,4 @@
-FROM:swaggerapi/swagger-ui:v3.19.0
+FROM swaggerapi/swagger-ui:v3.19.0
 
 RUN chown -R :0 /etc/nginx/ \
  && chown -R :0 /usr/lib/nginx/ \
