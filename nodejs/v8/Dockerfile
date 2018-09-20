@@ -8,19 +8,21 @@ RUN mkdir -p /nodejs \
 ENV HOME=/nodejs
 WORKDIR $HOME
 
-# see .dockerignore
-#ADD . $HOME/
+COPY payload/build-and-start.js /
+
+RUN chown :0 /build-and-start.js \
+ && chmod g+rwx /build-and-start.js
 
 RUN npm config set proxy http://webproxy.comp.db.de:8080
 RUN npm config set https-proxy http://webproxy.comp.db.de:8080
 
-RUN npm install -g @angular/cli
-RUN npm install -g @storybook/cli
-RUN npm install
-RUN npm run build
-RUN npm run build-storybook
+#RUN npm install -g @angular/cli
+#RUN npm install -g @storybook/cli
+#RUN npm install
+#RUN npm run build
+#RUN npm run build-storybook
 
-CMD [ "npm", "start" ]
+CMD [ "/build-and-start.js", "" ]
 
 EXPOSE 3000
 EXPOSE 3001
