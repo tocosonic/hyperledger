@@ -2,8 +2,9 @@ FROM node:8.12
 
 RUN mkdir -p /nodejs \
  && chown -R :0 /nodejs \
- && chmod -R g+rwx /nodejs
-
+ && chmod -R g+rwx /nodejs \
+ && chown -R :0 /usr/ \
+ && chmod -R g+rwx /usr/
 
 ENV HOME=/nodejs
 WORKDIR $HOME
