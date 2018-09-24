@@ -33,5 +33,6 @@ RUN sed -i 's/80 default_server/8090 default_server/g' /etc/nginx/conf.d/default
  && sed -i 's/listen 80 default_server/listen 8090 default_server/g' /etc/nginx.conf
 
 RUN sed -i 's/pid \/nginx.pid/pid \/home\/nginx.pid/g' /etc/nginx.conf
+RUN sed -i 's/user nobody nogroup/#user nobody nogroup/g' /etc/nginx.conf
 
 ENV HOME /home
