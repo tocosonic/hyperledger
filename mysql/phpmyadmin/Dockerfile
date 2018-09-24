@@ -34,5 +34,9 @@ RUN sed -i 's/80 default_server/8090 default_server/g' /etc/nginx/conf.d/default
 
 RUN sed -i 's/pid \/nginx.pid/pid \/home\/nginx.pid/g' /etc/nginx.conf
 RUN sed -i 's/user nobody nogroup/#user nobody nogroup/g' /etc/nginx.conf
+RUN sed -i 's/user/#user/g' /etc/supervisor.d/php.ini \
+ && sed -i 's/user/;user/g' /etc/php-fpm.conf
 
 ENV HOME /home
+
+USER nobody
