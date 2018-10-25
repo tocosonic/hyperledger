@@ -13,12 +13,14 @@ RUN apt-get -y --allow-unauthenticated install rsync \
 RUN mkdir -p /www \
  && chown -R :0 /www \
  && chmod -R g+rwx /www \
- && chown -R :0 /usr/ \
- && chmod -R g+rwx /usr/ \
- && chown -R :0 /etc/nginx/ \
- && chmod -R g+rwx /etc/nginx/ \
- && chown -R :0 /var/ \
- && chmod -R g+rwx /var/
+ && chown -R :0 /usr \
+ && chmod -R g+rwx /usr \
+ && chown -R :0 /etc/nginx \
+ && chmod -R g+rwx /etc/nginx \
+ && chown -R :0 /var \
+ && chmod -R g+rwx /var
+RUN chown -R :0 /run \
+ && chmod -R g+rwx /run
  
 RUN sed -i 's/listen\(.*\)80;/listen 8080;/' /etc/nginx/conf.d/default.conf
 RUN sed -i 's/root\(.*\).usr.share.nginx.html/root \/www/' /etc/nginx/conf.d/default.conf
