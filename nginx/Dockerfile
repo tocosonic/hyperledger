@@ -25,6 +25,8 @@ RUN chown -R :0 /run \
 RUN sed -i 's/listen\(.*\)80;/listen 8080;/' /etc/nginx/conf.d/default.conf
 RUN sed -i 's/root\(.*\).usr.share.nginx.html/root \/www/' /etc/nginx/conf.d/default.conf
 RUN sed -i 's/^user/#user/' /etc/nginx/nginx.conf
+RUN echo 'try_files $uri $uri/ /index.html' >> /etc/nginx/nginx.conf
+RUN cat /etc/nginx/nginx.conf
 
 RUN cp -r /usr/share/nginx/html/* /www/
 
