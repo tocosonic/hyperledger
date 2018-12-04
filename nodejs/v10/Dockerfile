@@ -9,7 +9,7 @@ RUN mkdir -p /nodejs \
 ENV HOME=/nodejs
 WORKDIR $HOME
 
-COPY payload/bs-config.json /
+# COPY payload/bs-config.json /
 COPY payload/copy-and-start.sh /
 
 RUN chown :0 /bs-config.json \
