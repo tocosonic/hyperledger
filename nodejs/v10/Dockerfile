@@ -12,8 +12,8 @@ WORKDIR $HOME
 # COPY payload/bs-config.json /
 COPY payload/copy-and-start.sh /
 
-RUN chown :0 /bs-config.json \
- && chmod g+rwx /bs-config.json
+#RUN chown :0 /bs-config.json \
+# && chmod g+rwx /bs-config.json
 
 RUN chown :0 /copy-and-start.sh \
  && chmod g+rwx /copy-and-start.sh
