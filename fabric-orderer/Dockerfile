@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-orderer:x86_64-1.1.0
+FROM hyperledger/fabric-orderer:1.4
 RUN mkdir /var/hyperledger/bin \
  && chown -R :0 /etc/hyperledger \
  && chmod -R a+w /etc/hyperledger \
@@ -12,6 +12,7 @@ RUN apt-get -y update \
  && apt-get -y install joe \
  && apt-get -y install less\
  && apt-get -y install p7zip-full \
+ && apt-get -y install tree \
  && apt-get -y install telnet
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \

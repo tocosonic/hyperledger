@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-baseimage:x86_64-0.4.6
+FROM hyperledger/fabric-baseimage:0.4.14
 
 # IMPORTANT
 # assign a new tag to the image stream (update build and deployment
@@ -55,8 +55,8 @@ RUN touch /.bash_history \
 
 WORKDIR /root
 
-LABEL org.hyperledger.fabric.version=1.1.0 \
-      org.hyperledger.fabric.base.version=0.4.6
+LABEL org.hyperledger.fabric.version=1.4 \
+      org.hyperledger.fabric.base.version=0.4.14
 
 ADD payload/javashim.tar.bz2 /root
 ADD payload/protos.tar.bz2 /root

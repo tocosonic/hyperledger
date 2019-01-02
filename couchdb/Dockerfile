@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-couchdb:0.4.10
+FROM hyperledger/fabric-couchdb:0.4.14
 
 #install the most recent version of CouchDB
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
@@ -26,6 +26,8 @@ RUN apt-get -y update \
 
 RUN apt-get -y install rsync \
  && apt-get -y install nano \
+ && apt-get -y install tree \
+ && apt-get -y install telnet \
  && apt-get -y install joe
 
 RUN sed -i 's/\[couchdb\]/\[couchdb\]\n\; Specify the location of the database in container.\n\; Optionally\, these directories can be mounted in the host via docker.\ndatabase_dir \= \/opt\/couchdb\/data\/\nview_index_dir \= \/opt\/couchdb\/data\/\nuri_file \= \/opt\/couchdb\/data\/couch.uri\nmax_dbs_open \= 8000\ndelayed_commits \= true\n/' /opt/couchdb/etc/local.ini

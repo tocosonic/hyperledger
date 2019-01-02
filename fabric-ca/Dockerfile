@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-ca:x86_64-1.1.0
+FROM hyperledger/fabric-ca:1.4
 RUN chown -R :0 /etc/hyperledger \
  && chmod -R a+w /etc/hyperledger
 RUN apt-get -y update \
@@ -8,6 +8,7 @@ RUN apt-get -y update \
  && apt-get -y install nano \
  && apt-get -y install joe \
  && apt-get -y install less\
+ && apt-get -y install tree \
  && apt-get -y install telnet
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \

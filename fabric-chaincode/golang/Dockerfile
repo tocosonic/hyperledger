@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-baseimage:x86_64-0.4.6
+FROM hyperledger/fabric-baseimage:0.4.14
 
 # ENV PATH=/chaincode/bin
 # ENV GOROOT=???
@@ -17,6 +17,7 @@ RUN apt-get -y update \
  && apt-get -y install nano \
  && apt-get -y install joe \
  && apt-get -y install less\
+ && apt-get -y install tree \
  && apt-get -y install telnet
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
@@ -28,8 +29,8 @@ RUN touch /.bash_history \
  && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
  && echo cd /chaincode >> /.bashrc
 
-LABEL org.hyperledger.fabric.version=1.1.0-preview \
-      org.hyperledger.fabric.base.version=0.4.2
+LABEL org.hyperledger.fabric.version=1.4 \
+      org.hyperledger.fabric.base.version=0.4.14
 
 ADD payload/goshim.tar.bz2 $GOPATH/src/
 COPY payload/chaintool payload/protoc-gen-go /usr/local/bin/
