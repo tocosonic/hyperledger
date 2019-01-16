@@ -1,4 +1,4 @@
-FROM phpmyadmin/phpmyadmin
+FROM phpmyadmin/phpmyadmin:4.8.3
 RUN chown -R :0 /var \
  && chmod -R g+rwx /var \
  && chown -R :0 /usr \
