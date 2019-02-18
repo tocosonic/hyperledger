@@ -2,6 +2,7 @@ FROM hyperledger/fabric-peer:x86_64-1.1.0
 # Prepare PVC moint points
 RUN mkdir /pvc \
  && mkdir /pvc/nginx-data \
+ && mkdir /pvc/nginx-etc \
  && chown -R :0 /pvc \
  && chmod -R g+rwx /pvc \
  && chmod -R o+rx /pvc
@@ -21,5 +22,6 @@ RUN touch /.bash_history \
  && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
  && echo cd /pvc >> /.bashrc
 VOLUME /pvc/nginx-data
+VOLUME /pvc/nginx-etc
 ENTRYPOINT []
 CMD []
