@@ -11,6 +11,7 @@ RUN apt-get -y --allow-unauthenticated install rsync \
  && apt-get -y --allow-unauthenticated install telnet
 
 RUN mkdir -p /www \
+ && mkdir -p /etc/nginx.bak \
  && chown -R :0 /www \
  && chmod -R g+rwx /www \
  && chown -R :0 /usr \
@@ -28,8 +29,7 @@ RUN sed -i 's/^user/#user/' /etc/nginx/nginx.conf
 
 COPY payload/default.conf /etc/nginx/conf.d/
 
-#RUN cat /etc/nginx/nginx.conf
-
+RUN cp -r /etc/nginx/* /etc/nginx.bak/
 RUN cp -r /usr/share/nginx/html/* /www/
 
 EXPOSE 8080
