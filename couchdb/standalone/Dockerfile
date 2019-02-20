@@ -1,6 +1,6 @@
 FROM hyperledger/fabric-couchdb:0.4.10
 
-#install the most recent version of CouchDB
+#install the most recent version of CouchDB (2.2.0)
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
  && curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
 
@@ -19,7 +19,7 @@ RUN apt -y autoremove
 RUN apt-get -y dist-upgrade
 
 RUN apt-get -y remove couchdb
-RUN apt-get -y install couchdb
+RUN apt-get -y install couchdb=2.2.0~xenial
 
 RUN apt-get -y update \
  && apt-get -y upgrade 

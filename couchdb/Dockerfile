@@ -19,7 +19,7 @@ RUN apt -y autoremove
 RUN apt-get -y dist-upgrade
 
 RUN apt-get -y remove couchdb
-RUN apt-get -y install couchdb
+RUN apt-get -y install couchdb=2.2.0~xenial
 
 RUN apt-get -y update \
  && apt-get -y upgrade
