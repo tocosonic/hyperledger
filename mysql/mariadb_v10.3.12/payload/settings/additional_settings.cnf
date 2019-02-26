@@ -1,3 +1,4 @@
 #possible values: 0 (= Unix-standard), 1 (= lowercase), 2 (= MacOS, mixed
 #case, but compare in lower case
+[mysqld]
 lower_case_table_names = 1
