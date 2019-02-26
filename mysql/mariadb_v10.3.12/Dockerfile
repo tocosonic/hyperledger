@@ -10,6 +10,8 @@ RUN apt-get -y update \
  && apt-get -y install procps \
  && apt-get -y install telnet
 
+COPY payload/settings/* /etc/mysql/mariadb.conf.d/
+
 RUN mkdir -p /var/lib/mysql
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
