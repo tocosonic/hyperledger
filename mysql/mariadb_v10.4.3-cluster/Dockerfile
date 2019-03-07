@@ -22,7 +22,7 @@ RUN chown -R :0 /var/lib \
  && chown :0 /docker-entrypoint.sh \
  && chmod g+rw /docker-entrypoint.sh \
  && chown :0 /openshift-entrypoint.sh \
- && chmod g+rw /openshift-entrypoint.sh \
+ && chmod g+rwx /openshift-entrypoint.sh \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin \
  && chown -R :0 /var/run/mysqld \
