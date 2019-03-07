@@ -209,7 +209,8 @@ if [ ! -f /status/clusterup ]; then
 	fi
   fi
 
-  exec $PARAMS
+#  exec $PARAMS
+  exec "$@"
 
 else
   echo "cluster was already started... If this is not true anymore, remove the file /status/clusterup"
