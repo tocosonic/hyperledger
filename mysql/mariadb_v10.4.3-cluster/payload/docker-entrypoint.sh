@@ -9,13 +9,16 @@ if [ ! -f /status/clusterup ]; then
   set -eo pipefail
   shopt -s nullglob
 
-
   # if command starts with an option, prepend mysqld
   if [ "${1:0:1}" = '-' ]; then
 	set -- mysqld "$@"
 	PARAMS="$@"
-	set -- "$@" $CLUSTERSTART
+  else
+	PARAMS="$@"
   fi
+
+  set -- "$@" $CLUSTERSTART
+  echo "using startup parameters $@"
 
   # skip setup if they want an option that stops mysqld
   wantHelp=
@@ -100,8 +103,15 @@ if [ ! -f /status/clusterup ]; then
 		mkdir -p "$DATADIR"
 
 		echo 'Initializing database'
+		installArgs=( --datadir="$DATADIR" --rpm )
+		if { mysql_install_db --help || :; } | grep -q -- '--auth-root-authentication-method'; then
+			# beginning in 10.4.3, install_db uses "socket" which only allows system user root to connect, switch back to "normal" to allow mysql root without a password
+			# see https://github.com/MariaDB/server/commit/b9f3f06857ac6f9105dc65caae19782f09b47fb3
+			# (this flag doesn't exist in 10.0 and below)
+			installArgs+=( --auth-root-authentication-method=normal )
+		fi
 		# "Other options are passed to mysqld." (so we pass all "mysqld" arguments directly here)
-		mysql_install_db --datadir="$DATADIR" --rpm "${@:2}"
+		mysql_install_db "${installArgs[@]}" "${@:2}"
 		echo 'Database initialized'
 
 		SOCKET="$(_get_config 'socket' "$@")"
@@ -199,17 +209,15 @@ if [ ! -f /status/clusterup ]; then
 	fi
   fi
 
+  exec "$PARAMS"
+
 else
   echo "cluster was already started... If this is not true anymore, remove the file /status/clusterup"
-  CLUSTERSTART=
 
   # if command starts with an option, prepend mysqld
   if [ "${1:0:1}" = '-' ]; then
-	set -- mysqld "$@"
-	PARAMS="$@"
+        set -- mysqld "$@"
   fi
 
+  exec "$@"
 fi
-
-#exec "$@"
-exec "$PARAMS"
