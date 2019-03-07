@@ -3,7 +3,6 @@
 #if the cluster was already started, skip the initialization methods and simply start mysqld
 if [ ! -f /status/clusterup ]; then
   echo "cluster not started yet..."
-  touch /status/clusterup
   CLUSTERSTART=--wsrep_new_cluster
 
   set -eo pipefail
@@ -208,6 +207,8 @@ if [ ! -f /status/clusterup ]; then
 		echo
 	fi
   fi
+
+  touch /status/clusterup
 
 #  exec $PARAMS
   exec "$@"
