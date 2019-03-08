@@ -2,7 +2,8 @@
 
 #if the cluster was already started, skip the initialization methods and simply start mysqld
 if [ ! -f /status/clusterup ]; then
-  echo "cluster not started yet..."
+  echo "###### doing a master start-up - preparation first ######"
+  echo "  cluster was not started yet..."
   CLUSTERSTART=--wsrep_new_cluster
 
   set -eo pipefail
@@ -208,13 +209,13 @@ if [ ! -f /status/clusterup ]; then
 	fi
   fi
 
+  echo "###### preparation finished - now doing a regular start-up ######"
   touch /status/clusterup
-
-#  exec $PARAMS
   exec "$@"
 
 else
-  echo "cluster was already started... If this is not true anymore, remove the file /status/clusterup"
+  echo "###### doing a regular slave-start-up ######"
+  echo "  cluster was already started... If this is not true anymore, remove the file /status/clusterup"
 
   # if command starts with an option, prepend mysqld
   if [ "${1:0:1}" = '-' ]; then
