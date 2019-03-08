@@ -203,9 +203,9 @@ if [ ! -f /status/clusterup ]; then
 			exit 1
 		fi
 
-		echo
+		echo "############################################"
 		echo 'MySQL init process done. Ready for start up.'
-		echo
+		echo "############################################"
 	fi
   fi
 
