@@ -15,20 +15,16 @@ COPY payload/settings/* /etc/mysql/mariadb.conf.d/
 COPY payload/docker-entrypoint.sh /openshift-entrypoint.sh
 COPY payload/readinessprobe.sh /
 COPY payload/livenessprobe.sh /
+COPY payload/init-mariadb.sh /
+COPY payload/start-mariadb.sh /
 
 RUN mkdir -p /var/lib/mysql
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
- && chmod g+rwx /readinessprobe.sh \
- && chmod g+rwx /livenessprobe.sh \
- && chown :0 /readinessprobe.sh \
- && chown :0 /livenessprobe.sh \
+ && chmod g+rwx /*.sh \
+ && chown :0 /*.sh \
  && chown -R :0 /docker-entrypoint-initdb.d \
  && chmod -R g+rw /docker-entrypoint-initdb.d \
- && chown :0 /docker-entrypoint.sh \
- && chmod g+rwx /docker-entrypoint.sh \
- && chown :0 /openshift-entrypoint.sh \
- && chmod g+rwx /openshift-entrypoint.sh \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin \
  && chown -R :0 /var/run/mysqld \
