@@ -5,7 +5,7 @@ if [ ! -f /status/clusterup ]; then
 
   echo "###### doing a master start-up - preparation first ######"
   echo "  cluster was not started yet..."
-  CLUSTERSTART=--wsrep_new_cluster
+#  CLUSTERSTART=--wsrep_new_cluster
 
   set -eo pipefail
   shopt -s nullglob
@@ -18,7 +18,7 @@ if [ ! -f /status/clusterup ]; then
 	PARAMS="$@"
   fi
 
-  set -- "$@" $CLUSTERSTART
+#  set -- "$@" $CLUSTERSTART
   echo "using startup parameters $@"
 
   if [ ! -f /status/initdone ]; then
