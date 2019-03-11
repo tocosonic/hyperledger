@@ -11,6 +11,7 @@ RUN apt-get -y update \
  && apt-get -y install telnet
 
 COPY payload/settings/* /etc/mysql/mariadb.conf.d/
+COPY payload/sql/* /docker-entrypoint-initdb.d/
 
 RUN mkdir -p /var/lib/mysql
 RUN chown -R :0 /var/lib \

@@ -17,6 +17,7 @@ COPY payload/readinessprobe.sh /
 COPY payload/livenessprobe.sh /
 COPY payload/init-mariadb.sh /
 COPY payload/start-mariadb.sh /
+COPY payload/sql/* /docker-entrypoint-initdb.d/
 
 RUN mkdir -p /var/lib/mysql
 RUN chown -R :0 /var/lib \
