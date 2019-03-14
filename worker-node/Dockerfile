@@ -1,5 +1,4 @@
 FROM ubuntu:bionic
-#FROM centos:latest
 
 RUN apt-get -y update \
  && apt-get -y upgrade
@@ -33,6 +32,8 @@ RUN apt-get -y install expat \
 
 RUN apt-get -y install openjdk-8-jdk
 RUN apt-get -y install openjdk-11-jdk
+
+RUN apt-get -y install libreadline5
 
 #RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
 # && yum -y install nano \
