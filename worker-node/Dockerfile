@@ -31,9 +31,17 @@ RUN apt-get -y install expat \
  && apt-get -y install git
 
 RUN apt-get -y install openjdk-8-jdk
-RUN apt-get -y install openjdk-11-jdk
+#RUN apt-get -y install openjdk-11-jdk
 
 RUN apt-get -y install libreadline5
+
+#install java11
+RUN wget  https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O /tmp/jdk.tar.gz
+RUN tar xzvf /tmp/jdk.tar.gz --directory /usr/lib/jvm
+RUN rm -f /tmp/jdk.tar.gz
+
+RUN for bin in /usr/lib/jvm/jdk-11.0.2/bin/*; do update-alternatives --install /usr/bin/$(basename $bin) $(basename $bin) $bin 100; done
+RUN for bin in /usr/lib/jvm/jdk-11.0.2/bin/*; do update-alternatives --set $(basename $bin) $bin; done
 
 #RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
 # && yum -y install nano \
