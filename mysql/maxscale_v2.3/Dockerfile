@@ -1,8 +1,11 @@
 FROM mariadb/maxscale:2.3
 
-RUN apt-get -y update \
- && apt-get -y upgrade \
- && apt-get -y install libltdl7 \
+RUN rm -f /etc/apt/sources.list.d/maxscale.list
+
+RUN apt-get -y update
+RUN apt-get -y upgrade
+
+RUN apt-get -y install libltdl7 \
  && apt-get -y install rsync \
  && apt-get -y install nano \
  && apt-get -y install joe \
