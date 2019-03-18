@@ -24,8 +24,8 @@ RUN apt-get -y install libltdl7 \
 
 RUN mkdir -p /config
 
-RUN chown -R :0 /var/run \
- && chmod -R g+rw /var/run \
+RUN chown -R :0 /run \
+ && chmod -R g+rw /run \
  && chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
  && chmod g+rwx /*.sh \
@@ -48,4 +48,4 @@ RUN touch /.bash_history \
  && chmod -R o+r /.bash* \
  && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc
 
-VOLUME /etc/maxscale.d
+VOLUME /config
