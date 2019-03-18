@@ -1,6 +1,6 @@
 FROM mariadb/maxscale:2.3
 
-RUN rm -f /etc/apt/sources.list.d/maxscale.list
+#RUN rm -f /etc/apt/sources.list.d/maxscale.list
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
