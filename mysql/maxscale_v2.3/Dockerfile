@@ -36,6 +36,18 @@ RUN chown -R :0 /run \
 RUN chown -R :0 /etc/ \
  && chmod -R g+rw /etc/
 
+RUN chown -R :0 /var/cache/ \
+ && chmod -R g+rw /var/cache/
+
+RUN chown -R :0 /var/log/ \
+ && chmod -R g+rw /var/log/
+
+RUN chown -R :0 /usr/share/maxscale/ \
+ && chmod -R g+rw /usr/share/maxscale/
+
+RUN chown -R :0 /usr/bin/ \
+ && chmod -R g+rw /usr/bin/
+
 #used to mount configurations
 RUN chown -R :0 /config/ \
  && chmod -R g+rw /config/
