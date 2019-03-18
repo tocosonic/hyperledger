@@ -21,9 +21,8 @@ RUN apt-get -y install libltdl7 \
 #COPY payload/livenessprobe.sh /
 #COPY payload/init-mariadb.sh /
 #COPY payload/start-mariadb.sh /
-#COPY payload/sql/* /docker-entrypoint-initdb.d/
 
-RUN mkdir -p /etc/maxscale.d
+RUN mkdir -p /config
 
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
@@ -37,6 +36,9 @@ RUN chown -R :0 /var/lib \
 RUN chown -R :0 /etc/ \
  && chmod -R g+rw /etc/
 
+#used to mount configurations
+RUN chown -R :0 /config/ \
+ && chmod -R g+rw /config/
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \
