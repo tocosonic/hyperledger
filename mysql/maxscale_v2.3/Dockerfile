@@ -24,12 +24,12 @@ RUN apt-get -y install libltdl7 \
 
 RUN mkdir -p /config
 
-RUN chown -R :0 /var/lib \
+RUN chown -R :0 /var/run \
+ && chmod -R g+rw /var/run \
+ && chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
  && chmod g+rwx /*.sh \
  && chown :0 /*.sh \
- && chown -R :0 /docker-entrypoint.sh \
- && chmod -R g+rw /docker-entrypoint.sh \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin
 
