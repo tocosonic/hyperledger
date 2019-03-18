@@ -46,7 +46,6 @@ RUN touch /.bash_history \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
- && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
- && echo cd /var/lib/mysql >> /.bashrc
+ && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc
 
 VOLUME /etc/maxscale.d
