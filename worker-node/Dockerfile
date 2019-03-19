@@ -82,8 +82,6 @@ RUN for bin in /usr/lib/jvm/jdk-11.0.2/bin/*; do update-alternatives --set $(bas
 # && echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/bashrc \
 # && source /etc/bashrc
 
-COPY payload/mysql /usr/local/bin/
-
 RUN touch /.gitconfig \
  && chown -R :0 /.gitconfig \
  && chmod -R g+rw /.gitconfig \
