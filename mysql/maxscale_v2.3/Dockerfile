@@ -24,6 +24,8 @@ RUN apt-get -y install libltdl7 \
 
 RUN mkdir -p /config
 
+COPY payload/subst-vars-in-cnf.sh /
+
 RUN chown -R :0 /run \
  && chmod -R g+rw /run \
  && chown -R :0 /var/lib \
