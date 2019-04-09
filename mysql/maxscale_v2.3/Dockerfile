@@ -1,32 +1,39 @@
 # Dockerfile for the 2.3 GA version of MariaDB MaxScale
-FROM ubuntu:bionic
+#FROM ubuntu:bionic
+
+#COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list.tmp
+
+#RUN apt-get -y update && \
+#    apt-get -y install gnupg2
+#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "0x135659e928c12247"
+#RUN mv /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list
+#RUN apt-get -y update
+#RUN apt-get --print-uris -y install maxscale
+#RUN rm -rf /var/lib/apt/lists/*
+
+#COPY payload/maxscale.cnf /etc/
+#ENTRYPOINT ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]
+
+#COPY payload/docker-entrypoint.sh /usr/local/bin/
+#RUN chmod 775 /usr/local/bin/docker-entrypoint.sh && \
+#    ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh # backwards compat
+#ENTRYPOINT ["docker-entrypoint.sh"]
+
+#CMD ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]
+
+
+FROM mariadb/maxscale:2.3
+#RUN rm -f /etc/apt/sources.list.d/maxscale.list
+RUN apt -y remove maxscale
 
 COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list.tmp
-
-RUN apt-get -y update && \
-    apt-get -y install gnupg2
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "0x135659e928c12247"
-RUN mv /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list
-RUN apt-get -y update
-RUN apt-get --print-uris -y install maxscale
-RUN rm -rf /var/lib/apt/lists/*
-
-COPY payload/maxscale.cnf /etc/
-ENTRYPOINT ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]
-
-COPY payload/docker-entrypoint.sh /usr/local/bin/
-RUN chmod 775 /usr/local/bin/docker-entrypoint.sh && \
-    ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh # backwards compat
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-CMD ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]
-
-
-#FROM mariadb/maxscale:2.3
-#RUN rm -f /etc/apt/sources.list.d/maxscale.list
+RUN mv -f /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list
+#COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
+
+RUN apt-get -y install maxscale
 
 RUN apt-get -y install libltdl7 \
  && apt-get -y install rsync \
