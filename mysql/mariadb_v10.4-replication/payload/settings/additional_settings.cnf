@@ -14,7 +14,15 @@ default-character-set=utf8mb4
 default-character-set=utf8mb4
 
 [mariadb]
-log-bin
+#log-bin
+log_bin
+log_slave_updates
+gtid_strict_mode
+
+#should be unique between all server and slaves / should be unique for nodes
+#belonging to a (Galera) cluster
+gtid_domain_id=
+
 #unique id is required # of statefule set + # of zone (1-3)
 server_id=
 #let's use the hostname
