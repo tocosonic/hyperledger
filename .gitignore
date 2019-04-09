@@ -2,3 +2,4 @@ Dockerfile.centos
 Dockerfile.nobody
 *~
 *.bak
+Dockerfile.*

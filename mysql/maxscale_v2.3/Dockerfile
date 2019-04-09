@@ -1,5 +1,28 @@
-FROM mariadb/maxscale:2.3
+# Dockerfile for the 2.3 GA version of MariaDB MaxScale
+FROM ubuntu:bionic
 
+COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list.tmp
+
+RUN apt-get -y update && \
+    apt-get -y install gnupg2 && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "0x135659e928c12247" && \
+    mv /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list && \
+    apt-get -y update && \
+    apt-get -y install maxscale && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY payload/maxscale.cnf /etc/
+ENTRYPOINT ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]
+
+COPY payload/docker-entrypoint.sh /usr/local/bin/
+RUN chmod 775 /usr/local/bin/docker-entrypoint.sh && \
+    ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh # backwards compat
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]
+
+
+#FROM mariadb/maxscale:2.3
 #RUN rm -f /etc/apt/sources.list.d/maxscale.list
 
 RUN apt-get -y update
@@ -14,13 +37,6 @@ RUN apt-get -y install libltdl7 \
  && apt-get -y install curl \
  && apt-get -y install procps \
  && apt-get -y install telnet
-
-#COPY payload/settings/* /etc/mysql/mariadb.conf.d/
-#COPY payload/docker-entrypoint.sh /openshift-entrypoint.sh
-#COPY payload/readinessprobe.sh /
-#COPY payload/livenessprobe.sh /
-#COPY payload/init-mariadb.sh /
-#COPY payload/start-mariadb.sh /
 
 RUN mkdir -p /config
 
