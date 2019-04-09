@@ -6,10 +6,10 @@ COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list.tmp
 RUN apt-get -y update && \
     apt-get -y install gnupg2
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "0x135659e928c12247"
-RUN mv /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list && \
-    apt-get -y update && \
-    apt-get -y install maxscale && \
-    rm -rf /var/lib/apt/lists/*
+RUN mv /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list
+RUN apt-get -y update
+RUN apt-get --print-uris -y install maxscale
+RUN rm -rf /var/lib/apt/lists/*
 
 COPY payload/maxscale.cnf /etc/
 ENTRYPOINT ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]
