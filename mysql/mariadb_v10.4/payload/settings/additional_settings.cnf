@@ -1,0 +1,14 @@
+#possible values: 0 (= Unix-standard), 1 (= lowercase), 2 (= MacOS, mixed
+#case, but compare in lower case
+[mysqld]
+lower_case_table_names = 1
+
+collation-server = utf8mb4_unicode_ci
+init-connect='SET NAMES utf8mb4'
+character-set-server = utf8mb4
+
+[client]
+default-character-set=utf8mb4
+
+[mysql]
+default-character-set=utf8mb4
