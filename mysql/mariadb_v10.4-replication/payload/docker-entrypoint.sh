@@ -1,44 +1,28 @@
 #!/bin/bash
+set -eo pipefail
+shopt -s nullglob
 
-#if the cluster was already started, skip the initialization methods and simply start mysqld
-if [ ! -f /status/clusterup ]; then
-
-  echo "###### doing a master start-up - preparation first ######"
-  echo "  cluster was not started yet..."
-#  CLUSTERSTART=--wsrep_new_cluster
-
-  set -eo pipefail
-  shopt -s nullglob
-
-  # if command starts with an option, prepend mysqld
-  if [ "${1:0:1}" = '-' ]; then
+# if command starts with an option, prepend mysqld
+if [ "${1:0:1}" = '-' ]; then
 	set -- mysqld "$@"
-	PARAMS="$@"
-  else
-	PARAMS="$@"
-  fi
+fi
 
-#  set -- "$@" $CLUSTERSTART
-  echo "using startup parameters $@"
-
-  if [ ! -f /status/initdone ]; then
-
-    # skip setup if they want an option that stops mysqld
-    wantHelp=
-    for arg; do
+# skip setup if they want an option that stops mysqld
+wantHelp=
+for arg; do
 	case "$arg" in
 		-'?'|--help|--print-defaults|-V|--version)
 			wantHelp=1
 			break
 			;;
 	esac
-    done
+done
 
-    # usage: file_env VAR [DEFAULT]
-    #    ie: file_env 'XYZ_DB_PASSWORD' 'example'
-    # (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
-    #  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
-    file_env() {
+# usage: file_env VAR [DEFAULT]
+#    ie: file_env 'XYZ_DB_PASSWORD' 'example'
+# (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
+#  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
+file_env() {
 	local var="$1"
 	local fileVar="${var}_FILE"
 	local def="${2:-}"
@@ -54,9 +38,9 @@ if [ ! -f /status/clusterup ]; then
 	fi
 	export "$var"="$val"
 	unset "$fileVar"
-    }
+}
 
-    _check_config() {
+_check_config() {
 	toRun=( "$@" --verbose --help --log-bin-index="$(mktemp -u)" )
 	if ! errors="$("${toRun[@]}" 2>&1 >/dev/null)"; then
 		cat >&2 <<-EOM
@@ -68,28 +52,28 @@ if [ ! -f /status/clusterup ]; then
 		EOM
 		exit 1
 	fi
-    }
+}
 
-    # Fetch value from server config
-    # We use mysqld --verbose --help instead of my_print_defaults because the
-    # latter only show values present in config files, and not server defaults
-    _get_config() {
+# Fetch value from server config
+# We use mysqld --verbose --help instead of my_print_defaults because the
+# latter only show values present in config files, and not server defaults
+_get_config() {
 	local conf="$1"; shift
 	"$@" --verbose --help --log-bin-index="$(mktemp -u)" 2>/dev/null \
 		| awk '$1 == "'"$conf"'" && /^[^ \t]/ { sub(/^[^ \t]+[ \t]+/, ""); print; exit }'
 	# match "datadir      /some/path with/spaces in/it here" but not "--xyz=abc\n     datadir (xyz)"
-    }
+}
 
-    # allow the container to be started with `--user`
-    if [ "$1" = 'mysqld' -a -z "$wantHelp" -a "$(id -u)" = '0' ]; then
+# allow the container to be started with `--user`
+if [ "$1" = 'mysqld' -a -z "$wantHelp" -a "$(id -u)" = '0' ]; then
 	_check_config "$@"
 	DATADIR="$(_get_config 'datadir' "$@")"
 	mkdir -p "$DATADIR"
 	find "$DATADIR" \! -user mysql -exec chown mysql '{}' +
 	exec gosu mysql "$BASH_SOURCE" "$@"
-    fi
+fi
 
-    if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
+if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 	# still need to check config, container may have started with --user
 	_check_config "$@"
 	# Get config
@@ -174,10 +158,16 @@ if [ ! -f /status/clusterup ]; then
 			mysql+=( -p"${MYSQL_ROOT_PASSWORD}" )
 		fi
 
+		#create replication user
+		echo "CREATE USER 'replication_user'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" | "${mysql[@]}"
+		echo "GRANT ALL ON *.* TO 'replication_user'@'%' ;" | "${mysql[@]}"
+		
+#only create tables on the master server
+if [ "$NUM_ID" = "10" ]; then
 		file_env 'MYSQL_DATABASE'
 		if [ "$MYSQL_DATABASE" ]; then
 			echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
-			mysql+=( "$MYSQL_DATABASE" )
+#			mysql+=( "$MYSQL_DATABASE" )
 		fi
 
 		file_env 'MYSQL_USER'
@@ -189,7 +179,7 @@ if [ ! -f /status/clusterup ]; then
 				echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' ;" | "${mysql[@]}"
 			fi
 		fi
-
+		
 		echo
 		for f in /docker-entrypoint-initdb.d/*; do
 			case "$f" in
@@ -200,20 +190,17 @@ if [ ! -f /status/clusterup ]; then
 			esac
 			echo
 		done
+fi
 
 		if ! kill -s TERM "$pid" || ! wait "$pid"; then
 			echo >&2 'MySQL init process failed.'
 			exit 1
 		fi
 
-		echo "############################################"
+		echo
 		echo 'MySQL init process done. Ready for start up.'
-		echo "############################################"
+		echo
 	fi
-    fi
-    touch /status/initdone
-    echo "###### preparation finished ######"
-
-  fi
-
 fi
+
+exec "$@"

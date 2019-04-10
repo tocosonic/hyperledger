@@ -15,7 +15,8 @@ COPY payload/readinessprobe.sh /
 COPY payload/livenessprobe.sh /
 COPY payload/sql/* /docker-entrypoint-initdb.d/
 
-#COPY payload/docker-entrypoint.sh /openshift-entrypoint.sh
+#update the old docker-entrypoint
+COPY payload/docker-entrypoint.sh /usr/local/bin/
 #COPY payload/init-mariadb.sh /
 #COPY payload/start-mariadb.sh /
 
