@@ -163,11 +163,11 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 		echo "GRANT ALL ON *.* TO 'replication_user'@'%' ;" | "${mysql[@]}"
 		
 #only create tables on the master server
-if [ "$NUM_ID" = "10" ]; then
+#if [ "$NUM_ID" = "10" ]; then
 		file_env 'MYSQL_DATABASE'
 		if [ "$MYSQL_DATABASE" ]; then
 			echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
-#			mysql+=( "$MYSQL_DATABASE" )
+			mysql+=( "$MYSQL_DATABASE" )
 		fi
 
 		file_env 'MYSQL_USER'
@@ -190,7 +190,7 @@ if [ "$NUM_ID" = "10" ]; then
 			esac
 			echo
 		done
-fi
+#fi
 
 		if ! kill -s TERM "$pid" || ! wait "$pid"; then
 			echo >&2 'MySQL init process failed.'
