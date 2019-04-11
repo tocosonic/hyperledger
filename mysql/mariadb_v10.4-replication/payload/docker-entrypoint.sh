@@ -1,4 +1,9 @@
 #!/bin/bash
+#echo 'SELECT 1' | mysql
+#sleep 100000
+#exit 0
+
+
 set -eo pipefail
 shopt -s nullglob
 
@@ -107,7 +112,7 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 
 		mysql=( mysql --protocol=socket -uroot -hlocalhost --socket="${SOCKET}" )
 
-		for i in {30..0}; do
+		for i in {60..0}; do
 			if echo 'SELECT 1' | "${mysql[@]}" &> /dev/null; then
 				break
 			fi
@@ -129,15 +134,17 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 			echo "GENERATED ROOT PASSWORD: $MYSQL_ROOT_PASSWORD"
 		fi
 
+echo "### Creating root user"
 		rootCreate=
 		# default root to listen for connections from anywhere
 		file_env 'MYSQL_ROOT_HOST' '%'
 		if [ ! -z "$MYSQL_ROOT_HOST" -a "$MYSQL_ROOT_HOST" != 'localhost' ]; then
 			# no, we don't care if read finds a terminating character in this heredoc
 			# https://unix.stackexchange.com/questions/265149/why-is-set-o-errexit-breaking-this-read-heredoc-expression/265151#265151
+			#${MYSQL_ROOT_HOST}
 			read -r -d '' rootCreate <<-EOSQL || true
-				CREATE USER 'root'@'${MYSQL_ROOT_HOST}' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;
-				GRANT ALL ON *.* TO 'root'@'${MYSQL_ROOT_HOST}' WITH GRANT OPTION ;
+				CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;
+				GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 			EOSQL
 		fi
 
@@ -146,9 +153,10 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 			--  or products like mysql-fabric won't work
 			SET @@SESSION.SQL_LOG_BIN=0;
 
-			DELETE FROM mysql.user WHERE user NOT IN ('mysql.sys', 'mysqlxsys', 'root') OR host NOT IN ('localhost') ;
-			SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
-			GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION ;
+			DELETE FROM mysql.user;
+--			WHERE user NOT IN ('mysql.sys', 'mysqlxsys', 'root') OR host NOT IN ('localhost') ;
+--			SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
+--			GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION ;
 			${rootCreate}
 			DROP DATABASE IF EXISTS test ;
 			FLUSH PRIVILEGES ;
@@ -159,37 +167,41 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 		fi
 
 		#create replication user
-		echo "CREATE USER 'replication_user'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" | "${mysql[@]}"
-		echo "GRANT ALL ON *.* TO 'replication_user'@'%' ;" | "${mysql[@]}"
+echo "### Create replication user"
+		echo "SET @@SESSION.SQL_LOG_BIN=0; CREATE USER 'replication_user'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" | "${mysql[@]}"
+		echo "SET @@SESSION.SQL_LOG_BIN=0; GRANT ALL ON *.* TO 'replication_user'@'%' WITH GRANT OPTION ;" | "${mysql[@]}"
+		echo "SET @@SESSION.SQL_LOG_BIN=0; FLUSH PRIVILEGES ; SET @@SESSION.SQL_LOG_BIN=1 ;" | "${mysql[@]}"
 		
 #only create tables on the master server
 #if [ "$NUM_ID" = "10" ]; then
+echo "### Creating database $MYSQL_DATABASE"
 		file_env 'MYSQL_DATABASE'
 		if [ "$MYSQL_DATABASE" ]; then
-			echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
+			echo "SET @@SESSION.SQL_LOG_BIN=0; CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
 			mysql+=( "$MYSQL_DATABASE" )
 		fi
 
 		file_env 'MYSQL_USER'
 		file_env 'MYSQL_PASSWORD'
 		if [ "$MYSQL_USER" -a "$MYSQL_PASSWORD" ]; then
-			echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" | "${mysql[@]}"
+			echo "SET @@SESSION.SQL_LOG_BIN=0; CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" | "${mysql[@]}"
 
 			if [ "$MYSQL_DATABASE" ]; then
-				echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' ;" | "${mysql[@]}"
+				echo "SET @@SESSION.SQL_LOG_BIN=0; GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' ;" | "${mysql[@]}"
 			fi
 		fi
 		
 		echo
-		for f in /docker-entrypoint-initdb.d/*; do
-			case "$f" in
-				*.sh)     echo "$0: running $f"; . "$f" ;;
-				*.sql)    echo "$0: running $f"; "${mysql[@]}" < "$f"; echo ;;
-				*.sql.gz) echo "$0: running $f"; gunzip -c "$f" | "${mysql[@]}"; echo ;;
-				*)        echo "$0: ignoring $f" ;;
-			esac
-			echo
-		done
+#		for f in /docker-entrypoint-initdb.d/*; do
+#			case "$f" in
+#				*.sh)     echo "$0: running $f"; . "$f" ;;
+#				*.sql)    echo "$0: running $f"; "${mysql[@]}" < "$f"; echo ;;
+#				*.sql.gz) echo "$0: running $f"; gunzip -c "$f" | "${mysql[@]}"; echo ;;
+#				*)        echo "$0: ignoring $f" ;;
+#			esac
+#			echo
+#		done
+
 #fi
 
 		if ! kill -s TERM "$pid" || ! wait "$pid"; then

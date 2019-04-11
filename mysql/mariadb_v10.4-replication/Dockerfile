@@ -15,11 +15,6 @@ COPY payload/readinessprobe.sh /
 COPY payload/livenessprobe.sh /
 COPY payload/sql/* /docker-entrypoint-initdb.d/
 
-#update the old docker-entrypoint
-COPY payload/docker-entrypoint.sh /usr/local/bin/
-#COPY payload/init-mariadb.sh /
-#COPY payload/start-mariadb.sh /
-
 RUN mkdir -p /var/lib/mysql
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
@@ -49,3 +44,9 @@ ENV MYSQL_ROOT_PASSWORD secret
 VOLUME /var/lib/mysql
 VOLUME /config
 VOLUME /status
+
+#update the old docker-entrypoint
+COPY payload/docker-entrypoint.sh /usr/local/bin/
+#COPY payload/init-mariadb.sh /
+#COPY payload/start-mariadb.sh /
+
