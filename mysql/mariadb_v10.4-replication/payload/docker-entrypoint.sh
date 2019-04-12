@@ -118,11 +118,12 @@ if [ ! -f $DATADIR/init-done ]; then
 				if echo 'SELECT 1' | "${mysql[@]}" &> /dev/null; then
 					break
 				fi
-				echo 'MySQL init process in progress...'
+				echo '!!! MySQL init process in progress...'
 				sleep 1
 			done
 			if [ "$i" = 0 ]; then
 				echo >&2 'MySQL init process failed.'
+				echo "FATAL: MySQL init process failed."
 				exit 1
 			fi
 
@@ -136,7 +137,7 @@ if [ ! -f $DATADIR/init-done ]; then
 				echo "GENERATED ROOT PASSWORD: $MYSQL_ROOT_PASSWORD"
 			fi
 
-	echo "### Creating root user"
+			echo "### Creating root user"
 			rootCreate=
 			# default root to listen for connections from anywhere
 			file_env 'MYSQL_ROOT_HOST' '%'
@@ -169,14 +170,12 @@ if [ ! -f $DATADIR/init-done ]; then
 			fi
 
 			#create replication user
-	echo "### Create replication user"
+			echo "### Creating replication user"
 			echo "SET @@SESSION.SQL_LOG_BIN=0; CREATE USER 'replication_user'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" | "${mysql[@]}"
 			echo "SET @@SESSION.SQL_LOG_BIN=0; GRANT ALL ON *.* TO 'replication_user'@'%' WITH GRANT OPTION ;" | "${mysql[@]}"
 			echo "SET @@SESSION.SQL_LOG_BIN=0; FLUSH PRIVILEGES ; SET @@SESSION.SQL_LOG_BIN=1 ;" | "${mysql[@]}"
 			
-	#only create tables on the master server
-	#if [ "$NUM_ID" = "10" ]; then
-	echo "### Creating database $MYSQL_DATABASE"
+			echo "### Creating database $MYSQL_DATABASE"
 			file_env 'MYSQL_DATABASE'
 			if [ "$MYSQL_DATABASE" ]; then
 				echo "SET @@SESSION.SQL_LOG_BIN=0; CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
@@ -204,15 +203,37 @@ if [ ! -f $DATADIR/init-done ]; then
 				echo
 			done
 
-	#now reset master
+			#now reset master
 			"${mysql[@]}" <<-EOSQL
 				-- Reset the master, so everything done so far will be ignored by replication.
 				STOP SLAVE;
 				RESET MASTER;
 			EOSQL
 			
-	#fi
+			#now try to set-up a slave and join the master
+			#the master's hostname will be in env var HOSTNAME_MASTER
+			if [ ! "$HOSTNAME" = "$HOSTNAME_MASTER" ]; then
+				echo "!!! Init of slave node"
 
+				#mariadb-hipps02-0.mariadb-hipps02-ss.bcacekvk.svc
+				export FQDN_MASTER=${HOSTNAME_MASTER}.${APPLICATION_NAME}-ss.${PROJECT_NAMESPACE}.svc
+				echo "  >>> using master node: $FQDN_MASTER"
+				
+				"${mysql[@]}" <<-EOSQL
+					-- Init slave node
+					STOP SLAVE;
+					CHANGE MASTER TO master_host='${FQDN_MASTER}', master_user='replication_user', master_password='${MYSQL_ROOT_PASSWORD}', master_use_gtid=slave_pos;
+					START SLAVE;
+				EOSQL
+				#let's wait for 10 seconds
+				sleep 10
+				echo 'SHOW SLAVE STATUS \G' | "${mysql[@]}"
+				echo "### Init of slave node complete"
+			else
+				echo "!!! Init of master node - no need to set-up a slave configuration"
+			fi
+	
+	
 			if ! kill -s TERM "$pid" || ! wait "$pid"; then
 				echo >&2 'MySQL init process failed.'
 				exit 1
@@ -225,6 +246,7 @@ if [ ! -f $DATADIR/init-done ]; then
 			echo
 		fi
 	fi
+	
 else
     echo "### Init was already done before..."
 fi
