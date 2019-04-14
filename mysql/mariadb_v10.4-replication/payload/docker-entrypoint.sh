@@ -216,7 +216,7 @@ if [ ! -f $DATADIR/init-done ]; then
 				echo "!!! Init of slave node"
 
 				#mariadb-hipps02-0.mariadb-hipps02-ss.bcacekvk.svc
-				export FQDN_MASTER=${HOSTNAME_MASTER}.${APPLICATION_NAME}-ss.${PROJECT_NAMESPACE}.svc
+				export FQDN_MASTER=${HOSTNAME_MASTER}.${SERVICE_NAME_MASTER}.${PROJECT_NAMESPACE}.svc
 				echo "  >>> using master node: $FQDN_MASTER"
 				
 				"${mysql[@]}" <<-EOSQL
