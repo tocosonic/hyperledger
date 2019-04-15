@@ -56,4 +56,4 @@ ENV HOME /home
 
 USER nobody
 ENV PHP_EXTRA_CONFIGURE_ARGS "--enable-fpm --disable-cgi"
-CMD ["phpmyadmin", "-n", "-j", "/home/supervisord.pid"]
+CMD ["supervisord", "-n", "-j", "/home/supervisord.pid"]
