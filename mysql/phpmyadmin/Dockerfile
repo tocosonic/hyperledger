@@ -39,6 +39,8 @@ RUN sed -i 's/80 default_server/8090 default_server/g' /etc/nginx/conf.d/default
 RUN sed -i 's/pid \/nginx.pid/pid \/home\/nginx.pid/g' /etc/nginx.conf
 #RUN sed -i 's/user nobody nogroup/#user nobody nogroup/g' /etc/nginx.conf
 
+RUN sed -i 's/;pidfile=\/run\/supervisord.pid/pidfile=\/home\/supervisord.pid/g' /etc/supervisord.conf
+
 RUN sed -i 's/user/#user/g' /etc/supervisor.d/php.ini
 
 RUN sed -i 's/user =/;user =/g' /usr/local/etc/php-fpm.d/www.conf
