@@ -55,3 +55,5 @@ RUN sed -i 's/chown/#chown/g' /run.sh
 ENV HOME /home
 
 USER nobody
+ENV PHP_EXTRA_CONFIGURE_ARGS "--enable-fpm --disable-cgi"
+CMD ["phpmyadmin", "-n", "-j", "/home/supervisord.pid"]
