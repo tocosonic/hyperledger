@@ -25,6 +25,10 @@ RUN chown :0 /etc/supervisord.conf \
  && chmod -R g+rwx /usr \
  && chown -R :0 /sessions \
  && chmod -R g+rwx /sessions
+
+RUN chown :0 /run.sh \
+ && chmod g+rwx /run.sh
+ 
 #test RUN chown -R :0 /www \
 # && chmod -R g+rwx /www
 
@@ -41,6 +45,8 @@ RUN sed -i 's/user =/;user =/g' /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i 's/group =/;group =/g' /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i 's/user =/;user =/g' /usr/local/etc/php-fpm.d/www.conf.default
 RUN sed -i 's/group =/;group =/g' /usr/local/etc/php-fpm.d/www.conf.default
+
+RUN sed -i 's/chown/#chown/g' /run.sh
 
 #/usr/local/etc/php-fpm.d/zz-docker.conf
 
