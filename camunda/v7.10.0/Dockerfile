@@ -24,6 +24,7 @@ RUN chown -R :0 /camunda \
  && chmod -R g+rwx /usr/lib \
  && chmod -R o+rx /usr/lib
 
+RUN apk add --no-cache nss
 RUN apk update
 RUN apk upgrade
 RUN apk add nano \
