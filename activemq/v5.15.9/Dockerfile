@@ -27,17 +27,12 @@ RUN if [ "$SHA512_VAL" != "$(sha512sum $ACTIVEMQ-bin.tar.gz | awk '{print($1)}')
     fi;
 
 RUN tar xzf $ACTIVEMQ-bin.tar.gz -C  /opt && \
-    ln -s /opt/$ACTIVEMQ $ACTIVEMQ_HOME && \
-    addgroup -S activemq && adduser -S -H -G activemq -h $ACTIVEMQ_HOME activemq && \
-    chown -R :0 /opt/$ACTIVEMQ && \
+    ln -s /opt/$ACTIVEMQ $ACTIVEMQ_HOME
+   
+RUN chown -R :0 /opt/$ACTIVEMQ && \
     chmod -R g+rw /opt/$ACTIVEMQ && \
     chown -h :0 $ACTIVEMQ_HOME && \
     chmod -R g+rw $ACTIVEMQ_HOME
-
-#    apk del build-dependencies && 
-#    rm -rf /var/cache/apk/*
-
-#USER activemq
 
 WORKDIR $ACTIVEMQ_HOME
 EXPOSE $ACTIVEMQ_TCP $ACTIVEMQ_AMQP $ACTIVEMQ_STOMP $ACTIVEMQ_MQTT $ACTIVEMQ_WS $ACTIVEMQ_UI
