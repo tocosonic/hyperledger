@@ -63,3 +63,7 @@ RUN cp /root/.bash* / \
  && echo cd / >> /.bashrc \
  && echo export no_proxy=$no_proxy,10.104.204.110 >> /.bashrc \
  && echo export NO_PROXY=$no_proxy,10.104.204.110 >> /.bashrc
+
+COPY payload/enable-ssh.sh /
+RUN chown :0 /enable-ssh.sh
+RUN chmod 775 /enable-ssh.sh
