@@ -28,7 +28,8 @@ RUN apt-get -y install expat \
  && apt-get -y install openssl \
  && apt-get -y install zlib1g \
  && apt-get -y install perl \
- && apt-get -y install git
+ && apt-get -y install git \
+ && apt-get -y install ansible
 
 RUN apt-get -y install openjdk-8-jdk
 
