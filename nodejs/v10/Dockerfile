@@ -18,6 +18,8 @@ COPY payload/copy-and-start.sh /
 RUN chown :0 /copy-and-start.sh \
  && chmod g+rwx /copy-and-start.sh
 
+USER root
+
 RUN npm config set proxy http://webproxy.comp.db.de:8080
 RUN npm config set https-proxy http://webproxy.comp.db.de:8080
 RUN npm i -g lite-server
