@@ -9,8 +9,8 @@ COPY payload/startup.sh /opt/jboss/wildfly/bin/
 COPY payload/mysql/* /opt/jboss/wildfly/modules/com/mysql/main/
 COPY payload/mariadb/* /opt/jboss/wildfly/modules/com/mariadb/main/
 COPY payload/camunda/modules/ /opt/jboss/wildfly/modules/
-COPY payload/camunda/server/wildfly-16.0.0.Final/standalone/deployments/camunda-webapp-jboss-7.11.0-alpha4.war /opt/jboss/wildfly/standalone/deployments
-COPY payload/camunda/server/wildfly-16.0.0.Final/standalone/deployments/camunda-engine-rest-7.11.0-alpha4.war /opt/jboss/wildfly/standalone/deployments
+COPY payload/camunda/server/wildfly-16.0.0.Final/standalone/deployments/camunda-webapp-jboss-7.11.0.war /opt/jboss/wildfly/standalone/deployments
+COPY payload/camunda/server/wildfly-16.0.0.Final/standalone/deployments/camunda-engine-rest-7.11.0.war /opt/jboss/wildfly/standalone/deployments
 
 #backup configuration and data
 RUN cp -rf /opt/jboss/wildfly/standalone /opt/jboss/wildfly/standalone.bak

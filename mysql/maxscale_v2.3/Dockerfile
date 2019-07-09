@@ -1,5 +1,5 @@
 FROM mariadb/maxscale:2.3
-#remove v2.3.4 to later install 2.3.5
+#remove v2.3.4 to later install 2.3.x
 RUN apt -y remove maxscale
 
 COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list.tmp

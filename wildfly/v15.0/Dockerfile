@@ -3,17 +3,10 @@ USER root
 
 #backup configuration and data
 RUN cp -rf /opt/jboss/wildfly/standalone /opt/jboss/wildfly/standalone.bak
-#RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main
 RUN mkdir -p /opt/jboss/wildfly/modules/com/mysql/main
 RUN mkdir -p /opt/jboss/wildfly/modules/com/mariadb/main
 
 COPY payload/startup.sh /opt/jboss/wildfly/bin/
-#COPY payload/mysql/module.xml /opt/jboss/wildfly/modules/com/mysql/main/
-#COPY payload/mysql/mysql-connector-java-5.1.44-bin.jar /opt/jboss/wildfly/modules/com/mysql/main/
-
-#COPY payload/mariadb/module.xml /opt/jboss/wildfly/modules/com/mariadb/main/
-#COPY payload/mariadb/mariadb-java-client-2.4.0.jar /opt/jboss/wildfly/modules/com/mariadb/main/
-
 COPY payload/mysql/* /opt/jboss/wildfly/modules/com/mysql/main/
 COPY payload/mariadb/* /opt/jboss/wildfly/modules/com/mariadb/main/
 

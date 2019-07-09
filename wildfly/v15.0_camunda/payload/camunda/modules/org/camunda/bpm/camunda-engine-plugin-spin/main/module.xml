@@ -1,6 +1,6 @@
 <module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.camunda-engine-plugin-spin">
   <resources>
-    <resource-root path="camunda-engine-plugin-spin-7.11.0-alpha4.jar" />
+    <resource-root path="camunda-engine-plugin-spin-7.11.0.jar" />
   </resources>
 
   <dependencies>

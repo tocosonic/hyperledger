@@ -1,6 +1,6 @@
 This is a distribution of
 
-       Camunda BPM platform v7.11.0-alpha4
+       Camunda BPM platform v7.11.0
 
 visit
        http://docs.camunda.org/
@@ -15,7 +15,7 @@ License information can be found in the LICENSE file.
 The Camunda BPM platform includes libraries developed by third
 parties. For license and attribution notices for these libraries,
 please refer to the documentation that accompanies this distribution
-(see the LICENSE_BOOK-7.11.0-alpha4 file).
+(see the LICENSE_BOOK-7.11.0 file).
 
 The packaged Wildfly Application Server is licensed under
 the LGPL license.
@@ -58,7 +58,7 @@ Contents:
 
 ==================
 
-Camunda BPM platform version: 7.11.0-alpha4
+Camunda BPM platform version: 7.11.0
 Wildfly Application Server version: 16.0.0.Final
 
 =================
