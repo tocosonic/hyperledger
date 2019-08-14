@@ -26,6 +26,8 @@ RUN apt-get -y install perl \
  && apt-get -y install make
 
 RUN yes | perl -MCPAN -e install forks
+RUN yes | perl -MCPAN -e install HTTPTunnelLib
+RUN yes | perl -MCPAN -e install Crypt::OpenSSL::RSA
 
 RUN cp -r /root/.cpan /
 RUN mkdir -p /config
@@ -34,7 +36,11 @@ RUN mkdir -p /var/http-tunnel
 COPY payload/subst-vars-in-cnf.sh /
 COPY payload/http-tunnel/* /var/http-tunnel/
 
-RUN tar xzvf /var/http-tunnel/HTTPTunnel_v1.2.1_platformindependent.tgz
+RUN tar xzvf /var/http-tunnel/HTTPTunnel_v1.2.1_platformindependent.tgz -C /var/http-tunnel/
+RUN cp -r /var/http-tunnel/HTTPTunnel_v1.2.1/common/ /var/http-tunnel/HTTPTunnel_v1.2.1/perl/
+RUN rm /var/http-tunnel/HTTPTunnel_v1.2.1_platformindependent.tgz
+
+RUN sed -i 's/PORT = 80/PORT = 11111/g' /var/http-tunnel/HTTPTunnel_v1.2.1/perl/httptunnel_server.cfg
 
 RUN chown -R :0 /run \
  && chmod -R g+rw /run \
@@ -70,11 +76,13 @@ RUN chown -R :0 /config/ \
  && chmod -R g+rw /config/
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
+
 RUN touch /.bash_history \
  && cp /root/.bash* / \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
  && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc
+RUN echo export PERL5LIB=/var/http-tunnel/HTTPTunnel_v1.2.1/perl >> /.bashrc
 
 VOLUME /config
