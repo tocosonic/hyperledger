@@ -20,9 +20,20 @@ RUN apt-get -y install libltdl7 \
  && apt-get -y install procps \
  && apt-get -y install telnet
 
+RUN apt-get -y install perl \
+ && apt-get -y install perl-modules-5.26 \
+ && apt-get -y install perl-openssl-defaults \
+ && apt-get -y install make
+
+RUN yes | perl -MCPAN -e install forks
+
 RUN mkdir -p /config
+RUN mkdir -p /var/http-tunnel
 
 COPY payload/subst-vars-in-cnf.sh /
+COPY payload/http-tunnel/* /var/http-tunnel/
+
+RUN tar xzvf /var/http-tunnel/HTTPTunnel_v1.2.1_platformindependent.tgz
 
 RUN chown -R :0 /run \
  && chmod -R g+rw /run \
