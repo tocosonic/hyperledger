@@ -54,7 +54,7 @@ RUN chown -R :0 /run \
 RUN chown -R :0 /.cpan \
  && chmod -R g+rw /.cpan \
  && chown -R :0 /var/http-tunnel \
- && chmod -R g+rw /var/http-tunnel
+ && chmod -R g+rwx /var/http-tunnel
 
 RUN chown -R :0 /etc/ \
  && chmod -R g+rw /etc/
