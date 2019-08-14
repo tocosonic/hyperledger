@@ -27,6 +27,7 @@ RUN apt-get -y install perl \
 
 RUN yes | perl -MCPAN -e install forks
 
+RUN cp -r /root/.cpan /
 RUN mkdir -p /config
 RUN mkdir -p /var/http-tunnel
 
@@ -43,6 +44,11 @@ RUN chown -R :0 /run \
  && chown :0 /*.sh \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin
+
+RUN chown -R :0 /.cpan \
+ && chmod -R g+rw /.cpan \
+ && chown -R :0 /var/http-tunnel \
+ && chmod -R g+rw /var/http-tunnel
 
 RUN chown -R :0 /etc/ \
  && chmod -R g+rw /etc/
