@@ -15,8 +15,9 @@ RUN apt-get -y install libltdl7 \
 
 RUN apt-get -y install build-essential \
  && apt-get -y install make \
- && apt-get -y install libmcrypt-dev \
+ && apt-get -y install mcrypt \
  && apt-get -y install libssl-dev \
+ && apt-get -y install libmcrypt-dev \
  && apt-get -y install perl \
  && apt-get -y install perl-modules-5.26 \
  && apt-get -y install perl-openssl-defaults \
@@ -25,7 +26,7 @@ RUN apt-get -y install build-essential \
 RUN cpanm "CPAN"
 RUN cpanm "forks"
 RUN cpanm "Crypt::OpenSSL::RSA"
-RUN cpanm "Mcrypt"
+RUN cpanm -v "Mcrypt"
 
 RUN cp -r /root/.cpan /
 RUN mkdir -p /var/http-tunnel
