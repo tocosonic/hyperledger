@@ -41,8 +41,6 @@ RUN sed -i 's/PORT = 80/PORT = 11111/g' /var/http-tunnel/HTTPTunnel_v1.2.1/perl/
 
 RUN chown -R :0 /var/lib \
  && chmod -R g+rw /var/lib \
- && chmod g+rwx /*.sh \
- && chown :0 /*.sh \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin
 
