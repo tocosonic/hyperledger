@@ -20,26 +20,9 @@ RUN apt-get -y install libltdl7 \
  && apt-get -y install procps \
  && apt-get -y install telnet
 
-RUN apt-get -y install perl \
- && apt-get -y install perl-modules-5.26 \
- && apt-get -y install perl-openssl-defaults \
- && apt-get -y install make
-
-RUN yes | perl -MCPAN -e install forks
-RUN yes | perl -MCPAN -e install Crypt::OpenSSL::RSA
-
-RUN cp -r /root/.cpan /
 RUN mkdir -p /config
-RUN mkdir -p /var/http-tunnel
 
 COPY payload/subst-vars-in-cnf.sh /
-COPY payload/http-tunnel/* /var/http-tunnel/
-
-RUN tar xzvf /var/http-tunnel/HTTPTunnel_v1.2.1_platformindependent.tgz -C /var/http-tunnel/
-RUN cp -r /var/http-tunnel/HTTPTunnel_v1.2.1/common/ /var/http-tunnel/HTTPTunnel_v1.2.1/perl/
-RUN rm /var/http-tunnel/HTTPTunnel_v1.2.1_platformindependent.tgz
-
-RUN sed -i 's/PORT = 80/PORT = 11111/g' /var/http-tunnel/HTTPTunnel_v1.2.1/perl/httptunnel_server.cfg
 
 RUN chown -R :0 /run \
  && chmod -R g+rw /run \
@@ -49,11 +32,6 @@ RUN chown -R :0 /run \
  && chown :0 /*.sh \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin
-
-RUN chown -R :0 /.cpan \
- && chmod -R g+rw /.cpan \
- && chown -R :0 /var/http-tunnel \
- && chmod -R g+rwx /var/http-tunnel
 
 RUN chown -R :0 /etc/ \
  && chmod -R g+rw /etc/
@@ -82,6 +60,5 @@ RUN touch /.bash_history \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
  && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc
-RUN echo export PERL5LIB=/var/http-tunnel/HTTPTunnel_v1.2.1/perl >> /.bashrc
 
 VOLUME /config
