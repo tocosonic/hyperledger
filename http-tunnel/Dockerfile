@@ -44,9 +44,7 @@ RUN chown -R :0 /var/lib \
  && chown -R :0 /usr/local/bin \
  && chmod -R g+rw /usr/local/bin
 
-RUN chown -R :0 /.cpan \
- && chmod -R g+rw /.cpan \
- && chown -R :0 /var/http-tunnel \
+RUN chown -R :0 /var/http-tunnel \
  && chmod -R g+rwx /var/http-tunnel
 
 RUN chown -R :0 /etc/ \
