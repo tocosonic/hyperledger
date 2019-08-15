@@ -29,7 +29,6 @@ RUN cpanm "forks"
 RUN cpanm "Crypt::OpenSSL::RSA"
 RUN cpanm -v "Mcrypt"
 
-RUN cp -r /root/.cpan /
 RUN mkdir -p /var/http-tunnel
 
 COPY payload/http-tunnel/* /var/http-tunnel/
