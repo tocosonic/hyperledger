@@ -3,7 +3,8 @@ FROM ubuntu:18.04
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
-RUN apt-get -y install libltdl7 \
+RUN apt-get -y install libltdl-dev \
+ && apt-get -y install libltdl7 \
  && apt-get -y install rsync \
  && apt-get -y install nano \
  && apt-get -y install joe \
