@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM centos:7
 # Prepare PVC moint points
 RUN mkdir /projects \
  && chown -R :0 /projects \
