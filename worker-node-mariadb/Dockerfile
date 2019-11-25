@@ -1,4 +1,4 @@
-FROM mariadb:10.3.12
+FROM mariadb:10.4
 
 RUN apt-get -y update \
  && apt-get -y upgrade
