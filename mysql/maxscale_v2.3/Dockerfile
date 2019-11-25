@@ -1,13 +1,16 @@
 FROM mariadb/maxscale:2.3
 #remove v2.3.4 to later install 2.3.x
 RUN apt -y remove maxscale
+RUN apt -y update
+RUN apt -y upgrade
 
 COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list.tmp
 RUN mv -f /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list
 
-RUN apt install -y ca-certificates
-RUN apt-get -y update
-RUN apt-get -y upgrade
+
+#RUN apt install -y ca-certificates
+#RUN apt-get -y update
+#RUN apt-get -y upgrade
 
 RUN apt-get -y install maxscale
 
