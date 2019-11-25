@@ -10,8 +10,8 @@ RUN mkdir /projects \
  && chmod -R o+rx /fabric-bin
 RUN yum -y install epel-release
 RUN yum -y install https://repo.ius.io/ius-release-el7.rpm
-RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
- && yum -y install nano \
+RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true
+RUN yum -y install nano \
  && yum -y install joe \
  && yum -y install man \
  && yum -y install telnet \
@@ -38,6 +38,7 @@ RUN yum -y upgrade
 RUN yum -y install python34
 RUN yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
 RUN yum -y groupinstall "Development Tools"
+RUN yum -y remove git
 RUN yum -y install git2u
 #RUN wget https://bootstrap.pypa.io/get-pip.py 
 # && python get-pip.py --no-wheel
