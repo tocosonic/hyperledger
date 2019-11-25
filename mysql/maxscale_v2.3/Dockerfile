@@ -5,6 +5,7 @@ RUN apt -y remove maxscale
 COPY payload/maxscale.list /etc/apt/sources.list.d/maxscale.list.tmp
 RUN mv -f /etc/apt/sources.list.d/maxscale.list.tmp /etc/apt/sources.list.d/maxscale.list
 
+RUN apt install -y ca-certificates
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
