@@ -8,9 +8,10 @@ RUN mkdir /projects \
  && chown -R :0 /fabric-bin \
  && chmod -R g+rwx /fabric-bin \
  && chmod -R o+rx /fabric-bin
+RUN yum -y install epel-release
+RUN yum -y install https://repo.ius.io/ius-release-el7.rpm
 RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true \
  && yum -y install nano \
- && yum -y install epel-release \
  && yum -y install joe \
  && yum -y install man \
  && yum -y install telnet \
