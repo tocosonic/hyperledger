@@ -1,6 +1,8 @@
 FROM centos:7
 # Prepare PVC moint points
-RUN mkdir -p /projects/data \
+RUN mkdir -p /prometheus/data \
+ && mkdir -p /prometheus/config \
+ && mkdir -p /prometheus/app \
  && chown -R :0 /projects \
  && chmod -R g+rwx /projects \
  && chmod -R o+rx /projects
@@ -22,10 +24,9 @@ RUN yum -y install git2u
 RUN yum -y upgrade
 
 RUN wget -q https://github.com/prometheus/prometheus/releases/download/v2.14.0/prometheus-2.14.0.linux-amd64.tar.gz -O /tmp/prometheus.tgz
-RUN cd /projects
-RUN tar xzvf /tmp/prometheus.tgz
-RUN cd prometheus-*
-RUN rm -f /tmp/prometheus-*.*
+RUN tar xzvf /tmp/prometheus.tgz -C /prometheus/app
+RUN mv /prometheus/app/prometheus-*/* /prometheus/app/
+RUN rm -f /tmp/prometheus-*
 
 RUN source /etc/bashrc
 RUN touch /.gitconfig \
@@ -45,4 +46,6 @@ RUN cp /root/.bash* / \
 RUN chown -R :0 /var/run \
  && chmod -R g+rwx /var/run \
  && chmod -R o+rx /var/run
-VOLUME /projects
+RUN cd /prometheus
+VOLUME /prometheus/data
+VOLUME /prometheus/config
