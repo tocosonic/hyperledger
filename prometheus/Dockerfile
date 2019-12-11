@@ -3,9 +3,9 @@ FROM centos:7
 RUN mkdir -p /prometheus/data \
  && mkdir -p /prometheus/config \
  && mkdir -p /prometheus/app \
- && chown -R :0 /projects \
- && chmod -R g+rwx /projects \
- && chmod -R o+rx /projects
+ && chown -R :0 /prometheus \
+ && chmod -R g+rwx /prometheus \
+ && chmod -R o+rx /prometheus
 RUN yum -y install epel-release
 RUN yum -y install https://repo.ius.io/ius-release-el7.rpm
 RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true
