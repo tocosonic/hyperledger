@@ -1,4 +1,4 @@
-FROM golang:1.11-alpine as builder
+FROM golang:1.11-alpine
 # Add a user to run this server; the user belongs to group root (like on OpenShift)
 
 WORKDIR /usr/src/app
