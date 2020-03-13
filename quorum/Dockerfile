@@ -12,3 +12,7 @@ RUN cd quorum && make all
 # Update access rights
 RUN chown -R :0 /usr/src/app/quorum
 RUN chmod -R g+rwx /usr/src/app/quorum
+
+RUN mkdir /.ethereum
+RUN chown -R :0 /.ethereum
+RUN chmod -R g+rwx /.ethereum
