@@ -12,4 +12,4 @@ echo "copy default libs"
 cp -nr ${WILDFLY_BASE_DIR}/standalone.bak/lib/* ${LIB_DIR}
 
 echo "start-up Wildfly..."
-/opt/jboss/wildfly/bin/standalone.sh "$@"
+${WILDFLY_BASE_DIR}/bin/standalone.sh "$@"
