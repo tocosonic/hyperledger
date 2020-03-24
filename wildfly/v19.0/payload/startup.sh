@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WILDFLY_BASE_DIR=/opt/jboss/wildfly
+WILDFLY_BASE_DIR=/opt/wildfly
 CFG_DIR=${WILDFLY_BASE_DIR}/standalone/configuration
 LIB_DIR=${WILDFLY_BASE_DIR}/standalone/lib
 
