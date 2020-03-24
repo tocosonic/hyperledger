@@ -1,0 +1,9 @@
+<module xmlns="urn:jboss:module:1.3" name="com.mariadb">
+    <resources>
+        <resource-root path="mariadb-java-client-2.6.0.jar"/>
+    </resources>
+    <dependencies>
+        <module name="javax.api"/>
+        <module name="javax.transaction.api"/>
+    </dependencies>
+</module>
