@@ -1,14 +1,14 @@
-FROM quay.io/wildfly/wildfly-centos7
+FROM jboss/wildfly:19.0.0.Final
 USER root
 
 #backup configuration and data
-RUN cp -rf /opt/wildfly/standalone /opt/wildfly/standalone.bak
-RUN mkdir -p /opt/wildfly/modules/com/mysql/main
-RUN mkdir -p /opt/wildfly/modules/com/mariadb/main
+RUN cp -rf /opt/jboss/wildfly/standalone /opt/jboss/wildfly/standalone.bak
+RUN mkdir -p /opt/jboss/wildfly/modules/com/mysql/main
+RUN mkdir -p /opt/jboss/wildfly/modules/com/mariadb/main
 
-COPY payload/startup.sh /opt/wildfly/bin/
-COPY payload/mysql/* /opt/wildfly/modules/com/mysql/main/
-COPY payload/mariadb/* /opt/wildfly/modules/com/mariadb/main/
+COPY payload/startup.sh /opt/jboss/wildfly/bin/
+COPY payload/mysql/* /opt/jboss/wildfly/modules/com/mysql/main/
+COPY payload/mariadb/* /opt/jboss/wildfly/modules/com/mariadb/main/
 
 
 RUN chown -R :0 /opt \
@@ -40,9 +40,9 @@ RUN touch /.bash_history \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
  && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
- && echo cd /opt/jboss >> /.bashrc
+ && echo cd /opt/jboss/wildfly >> /.bashrc
 
-VOLUME /opt/wildfly/standalone/deployments
-VOLUME /opt/wildfly/standalone/data
-VOLUME /opt/wildfly/standalone/configuration
-VOLUME /opt/wildfly/standalone/log
+VOLUME /opt/jboss/wildfly/standalone/deployments
+VOLUME /opt/jboss/wildfly/standalone/data
+VOLUME /opt/jboss/wildfly/standalone/configuration
+VOLUME /opt/jboss/wildfly/standalone/log
