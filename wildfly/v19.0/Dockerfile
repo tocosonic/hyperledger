@@ -30,7 +30,13 @@ RUN apt-get install -y telnet
 RUN apt-get install -y ant
 RUN apt-get install -y maven
 RUN apt-get install -y wget
+RUN apt-get install -y less
+RUN apt-get install -y locales-all
+RUN apt-get install -y locales
 RUN apt-get upgrade
+
+RUN dpkg-reconfigure locales
+RUN locale-gen
 
 #RUN yum -y install nano \
 # && yum -y install epel-release \
@@ -55,7 +61,12 @@ RUN touch /.bash_history \
  && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
  && echo cd /opt/jboss/wildfly >> /.bashrc
 
+RUN rm -rf /bitnami
+
 VOLUME /opt/jboss/wildfly/standalone/deployments
 VOLUME /opt/jboss/wildfly/standalone/data
 VOLUME /opt/jboss/wildfly/standalone/configuration
 VOLUME /opt/jboss/wildfly/standalone/log
+
+ENV JBOSS_HOME /opt/jboss/wildfly
+ENTRYPOINT /opt/jboss/wildfly/bin/startup.sh
