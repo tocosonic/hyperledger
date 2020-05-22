@@ -13,14 +13,13 @@ RUN yum -y install nano \
  && yum -y install joe \
  && yum -y install man \
  && yum -y install telnet \
- && yum -y install tree \
  && yum -y install rsync \
  && yum -y install bzip2 \
  && yum -y install p7zip \
  && yum -y install wget \
  && yum -y install net-tools \
  && yum -y install iproute
-RUN yum -y install git2u
+RUN yum -y install git
 RUN yum -y upgrade
 
 RUN wget -q https://github.com/prometheus/prometheus/releases/download/v2.14.0/prometheus-2.14.0.linux-amd64.tar.gz -O /tmp/prometheus.tgz
