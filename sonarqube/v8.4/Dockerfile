@@ -1,15 +1,17 @@
 FROM sonarqube:8.4-community
 
-RUN apt-get -y update \
- && apt-get -y upgrade \
- && apt-get -y install libltdl7 \
- && apt-get -y install rsync \
- && apt-get -y install nano \
- && apt-get -y install joe \
- && apt-get -y install less\
- && apt-get -y install procps \
- && apt-get -y install telnet
-
+RUN yum -y install epel-release
+RUN yum -y install https://repo.ius.io/ius-release-el7.rpm
+RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true
+RUN yum -y update
+RUN yum -y upgrade
+RUN yum -y install nano \
+ && yum -y install joe \
+ && yum -y install libtool-ltdl-devel \
+ && yum -y install net-tools \
+ && yum -y install telnet \
+ && yum -y install wget
+ 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \
  && cp /root/.bash* / \
