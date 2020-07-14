@@ -1,16 +1,16 @@
 FROM sonarqube:8.4-community
 
-RUN yum -y install epel-release
-RUN yum -y install https://repo.ius.io/ius-release-el7.rpm
-RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true
-RUN yum -y update
-RUN yum -y upgrade
-RUN yum -y install nano \
- && yum -y install joe \
- && yum -y install libtool-ltdl-devel \
- && yum -y install net-tools \
- && yum -y install telnet \
- && yum -y install wget
+#RUN yum -y install epel-release
+#RUN yum -y install https://repo.ius.io/ius-release-el7.rpm
+#RUN yum-config-manager --save --setopt=base.skip_if_unavailable=true
+#RUN yum -y update
+#RUN yum -y upgrade
+#RUN yum -y install nano \
+# && yum -y install joe \
+# && yum -y install libtool-ltdl-devel \
+# && yum -y install net-tools \
+# && yum -y install telnet \
+# && yum -y install wget
  
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history \
