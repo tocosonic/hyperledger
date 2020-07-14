@@ -13,13 +13,13 @@ FROM sonarqube:8.4-community
 # && yum -y install wget
  
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
-RUN touch /.bash_history \
- && cp /root/.bash* / \
- && chown -R :0 /.bash* \
- && chmod -R g+rw /.bash* \
- && chmod -R o+r /.bash* \
- && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
- && echo cd /opt/sonarqube >> /.bashrc
+#RUN touch /.bash_history \
+# && cp /root/.bash* / \
+# && chown -R :0 /.bash* \
+# && chmod -R g+rw /.bash* \
+# && chmod -R o+r /.bash* \
+# && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
+# && echo cd /opt/sonarqube >> /.bashrc
 
 RUN chown -R :0 /opt/sonarqube \
  && chmod -R g+rw /opt/sonarqube 
