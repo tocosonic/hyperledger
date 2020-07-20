@@ -14,6 +14,6 @@ RUN touch /.bash_history \
 
 RUN chown -R :0 /opt/sonarqube \
  && chmod -R g+rw /opt/sonarqube 
- 
+
 VOLUME /opt/sonarqube/data
 VOLUME /opt/sonarqube/extensions
