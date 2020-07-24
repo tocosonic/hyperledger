@@ -5,6 +5,7 @@ RUN apk upgrade
 RUN apk add joe \
  && apk add busybox \
  && apk add busybox-extras
+RUN apk add curl
 
 RUN touch /.bash_history \
  && chown -R :0 /.bash* \
@@ -17,3 +18,4 @@ RUN chown -R :0 /opt/sonarqube \
 
 VOLUME /opt/sonarqube/data
 VOLUME /opt/sonarqube/extensions
+VOLUME /opt/sonarqube/conf
