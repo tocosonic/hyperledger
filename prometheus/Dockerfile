@@ -19,29 +19,29 @@ RUN yum -y install nano \
  && yum -y install wget \
  && yum -y install net-tools \
  && yum -y install iproute
-RUN yum -y install git
+#RUN yum -y install git
 RUN yum -y upgrade
 
-RUN wget -q https://github.com/prometheus/prometheus/releases/download/v2.14.0/prometheus-2.14.0.linux-amd64.tar.gz -O /tmp/prometheus.tgz
+RUN wget -q https://github.com/prometheus/prometheus/releases/download/v2.20.1/prometheus-2.20.1.linux-amd64.tar.gz -O /tmp/prometheus.tgz
 RUN tar xzvf /tmp/prometheus.tgz -C /prometheus/app
 RUN mv /prometheus/app/prometheus-*/* /prometheus/app/
 RUN rm -f /tmp/prometheus-*
 
 RUN source /etc/bashrc
-RUN touch /.gitconfig \
- && chown -R :0 /.gitconfig \
- && chmod -R g+rw /.gitconfig \
- && chmod -R o+r /.gitconfig
+#RUN touch /.gitconfig \
+# && chown -R :0 /.gitconfig \
+# && chmod -R g+rw /.gitconfig \
+# && chmod -R o+r /.gitconfig
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 RUN touch /.bash_history
 RUN cp /root/.bash* / \
  && chown -R :0 /.bash* \
  && chmod -R g+rw /.bash* \
  && chmod -R o+r /.bash* \
- && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc \
- && echo cd /projects >> /.bashrc \
- && echo export no_proxy=$no_proxy,10.104.204.110 >> /.bashrc \
- && echo export NO_PROXY=$no_proxy,10.104.204.110 >> /.bashrc
+ && echo PS1=\"\\[\\w\\]\\nuser@\\h:\\\\$ \" >> \.bashrc
+# && echo cd /projects >> /.bashrc \
+# && echo export no_proxy=$no_proxy,10.104.204.110 >> /.bashrc \
+# && echo export NO_PROXY=$no_proxy,10.104.204.110 >> /.bashrc
 RUN chown -R :0 /var/run \
  && chmod -R g+rwx /var/run \
  && chmod -R o+rx /var/run
