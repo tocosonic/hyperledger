@@ -32,6 +32,9 @@ RUN sed -i 's/^user/#user/' /etc/nginx/nginx.conf
 
 RUN cp -r /usr/share/nginx/html/* /www/
 
+#create reverse proxy configuration for prometheus
+COPY payload/nginx-prometheus-proxy.conf /etc/nginx/
+
 EXPOSE 8080
 
 VOLUME /www
