@@ -10,7 +10,9 @@ RUN apt-get -y --allow-unauthenticated install rsync \
  && apt-get -y --allow-unauthenticated install less\
  && apt-get -y --allow-unauthenticated install p7zip-full \
  && apt-get -y --allow-unauthenticated install telnet \
- && apt-get -y --allow-unauthenticated install apache2-utils
+ && apt-get -y --allow-unauthenticated install apache2-utils \
+ && apt-get -y --allow-unauthenticated install net-tools
+
  
 RUN mkdir -p /www \
  && chown -R :0 /www \
