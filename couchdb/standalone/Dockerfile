@@ -2,7 +2,7 @@ FROM hyperledger/fabric-couchdb:0.4.10
 
 #install the most recent version of CouchDB (2.2.0)
 RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
- && curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
+ && curl --insecure -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
 
 RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
  && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
