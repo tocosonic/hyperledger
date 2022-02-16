@@ -1,25 +1,12 @@
-FROM hyperledger/fabric-couchdb:0.4.10
+FROM couchdb:2
 
-#install the most recent version of CouchDB (2.2.0)
-RUN echo "deb https://apache.bintray.com/couchdb-deb xenial main" | tee -a /etc/apt/sources.list \
- && curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | apt-key add -
+#install the most recent version of CouchDB (2.3.1 as of 2022-02-16)
 
-RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
- && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
- && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
-RUN echo "couchdb couchdb/mode select none" | debconf-set-selections
+#RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
+# && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
+# && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
+#RUN echo "couchdb couchdb/mode select none" | debconf-set-selections
 
-RUN apt-get -y update
-
-RUN apt-get -y clean
-RUN apt-get -y -f install
-RUN dpkg --configure -a
-RUN apt-get -y -f install
-RUN apt -y autoremove
-RUN apt-get -y dist-upgrade
-
-RUN apt-get -y remove couchdb
-RUN apt-get -y install couchdb=2.2.0~xenial
 
 RUN apt-get -y update \
  && apt-get -y upgrade 
