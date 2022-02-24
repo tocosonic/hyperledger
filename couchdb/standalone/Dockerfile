@@ -1,13 +1,5 @@
 FROM couchdb:2
 
-#install the most recent version of CouchDB (2.3.1 as of 2022-02-16)
-
-#RUN mv /opt/couchdb/etc/default.ini /opt/couchdb/etc/default.ini.bak \
-# && mv /opt/couchdb/etc/local.ini /opt/couchdb/etc/local.ini.bak \
-# && mv /opt/couchdb/etc/vm.args /opt/couchdb/etc/vm.args.bak
-#RUN echo "couchdb couchdb/mode select none" | debconf-set-selections
-
-
 RUN apt-get -y update \
  && apt-get -y upgrade 
 
@@ -46,15 +38,17 @@ RUN echo [cluster] >> /opt/couchdb/etc/local.ini \
  && echo bind_address = 0.0.0.0 >> /opt/couchdb/etc/local.ini
 
 #backup configuration data
-RUN cp -rf /opt/couchdb/etc /opt/couchdb/etc.bak
-COPY payload/startup.sh /
+##RUN cp -rf /opt/couchdb/etc /opt/couchdb/etc.bak
+##COPY payload/startup.sh /
 
 #Prepare folder access rights
 RUN chown -R :0 /opt/couchdb/ \
- && chmod -R g+rwx /opt/couchdb/ \
- && sed -i 's/; admin = admin/;admin = mysecretpassword/' /docker-entrypoint.sh \
- && sed -i 's/chown.*//g' /docker-entrypoint.sh \
- && sed -i 's/su-exec couchdb \"$@\"/exec \"$@\"/g' /docker-entrypoint.sh
+ && chmod -R g+rwx /opt/couchdb/
+ 
+RUN sed -i 's/; admin = admin/;admin = mysecretpassword/' /docker-entrypoint.sh
+RUN sed -i 's/chown./echo commented out chown /g' /docker-entrypoint.sh
+RUN sed -i 's/chmod./echo commented out chmod /g' /docker-entrypoint.sh
+RUN sed -i 's/su-exec couchdb \"$@\"/exec \"$@\"/g' /docker-entrypoint.sh
 
 RUN echo alias ll='ls -l --color=auto' >> /etc/profile
 
