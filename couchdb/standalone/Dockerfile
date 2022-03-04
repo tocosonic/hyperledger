@@ -38,8 +38,8 @@ RUN echo [cluster] >> /opt/couchdb/etc/local.ini \
  && echo bind_address = 0.0.0.0 >> /opt/couchdb/etc/local.ini
 
 #backup configuration data
-##RUN cp -rf /opt/couchdb/etc /opt/couchdb/etc.bak
-##COPY payload/startup.sh /
+RUN cp -rf /opt/couchdb/etc /opt/couchdb/etc.bak
+COPY payload/startup.sh /
 
 #Prepare folder access rights
 RUN chown -R :0 /opt/couchdb/ \
