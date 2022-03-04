@@ -7,6 +7,7 @@ CFG_DIR=${COUCHDB_BASE_DIR}/etc
 if [ -z "$(ls -A $CFG_DIR)"  ]; then
   echo "copy default configuration data"
   cp -rf ${COUCHDB_BASE_DIR}/etc.bak/* ${CFG_DIR}/
+  chown -R :0 ${CFG_DIR}/*
 fi
 
 echo "start-up CouchDB..."
